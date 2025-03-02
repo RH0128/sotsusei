@@ -1,33 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from "@/components/ui/button";
+ルーティング設定
 
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import SearchResult from "./pages/SearchResult";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-     
-      <h1>Vite + React</h1>
-      <div className="card">
-         <Button variant="ghost" size="lg">
-        Click
-      </Button>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/search-result" component={SearchResult} />
+      </Switch>
+    </Router>
+  );
+};
 
-      <Button variant="destructive" size="sm">
-        Destructive Small
-      </Button>
-
-      <Button variant="outline" size="default">
-        Outline Button
-      </Button>
-      </div>
-    
-    </>
-  )
-}
-
-export default App
+export default App;
