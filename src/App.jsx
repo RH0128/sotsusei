@@ -7,12 +7,10 @@ import SearchResult from "./pages/SearchResult";
 
 const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/search-result" component={SearchResult} />
-      </Switch>
-    </Router>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search-result" element={<SearchResult />} />
+    </Routes>
   );
 };
 
