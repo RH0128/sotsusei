@@ -1,33 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from "@/components/ui/button";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SearchResult from "./pages/SearchResult";
+import Chat from "./pages/Chat";
 
-
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-     
-      <h1>Vite + React</h1>
-      <div className="card">
-         <Button variant="ghost" size="lg">
-        Click
-      </Button>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search-result" element={<SearchResult />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>
+    </Router>
+  );
+};
 
-      <Button variant="destructive" size="sm">
-        Destructive Small
-      </Button>
-
-      <Button variant="outline" size="default">
-        Outline Button
-      </Button>
-      </div>
-    
-    </>
-  )
-}
-
-export default App
+export default App;
