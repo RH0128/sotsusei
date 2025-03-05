@@ -3,7 +3,7 @@ import '../App.css';
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import SearchForm from "@/components/ui/SearchForm";
+import SearchForm from "@/components/ui/searchform";
 import { Button } from "@/components/ui/button";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
