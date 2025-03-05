@@ -27,10 +27,9 @@ function App() {
   };
 
   const breadcrumbItems = [
-    { href: "#", label: "Building Your Application" },
-    { href: "#", label: "Data Fetching" },
+    { href: "#", label: "ホーム" },
   ];
-
+gir
   return (
     <SidebarProvider>
       <AppSidebar />
