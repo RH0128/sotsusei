@@ -1,12 +1,48 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 
-const SearchForm = ({ speakerName, setSpeakerName, meetingName, setMeetingName, dateRange, setDateRange, isSearching, handleSearch }) => {
+const SearchForm = ({ speakerName, setSpeakerName, dateRange, setDateRange, isSearching, setIsSearching }) => {
+  const navigate = useNavigate();
+
+  // 検索処理
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setIsSearching(true);
+
+    try {
+      // 日付のフォーマット確認
+      const fromDate = dateRange?.from?.toISOString().split('T')[0] || '';
+      const toDate = dateRange?.to?.toISOString().split('T')[0] || '';
+
+      // URLSearchParams でパラメータを設定
+      const params = new URLSearchParams({
+        speaker: speakerName,
+        from: fromDate,
+        until: toDate,
+      });
+
+      // APIリクエストを送信
+      const response = await fetch(`/api/speech?${params}`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      setIsSearching(false);
+
+      // 検索結果ページに遷移し、結果を渡す
+      navigate('/search-result', { state: { results: data } });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setIsSearching(false);
+    }
+  };
+
   return (
     <Card className="mb-8">
       <CardHeader>
@@ -14,7 +50,7 @@ const SearchForm = ({ speakerName, setSpeakerName, meetingName, setMeetingName, 
         <CardDescription className="pt-1">あの人は国会でどんなこと言ってる？</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={(e) => handleSearch(e, 1)} className="space-y-6">
+        <form onSubmit={handleSearch} className="space-y-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 text-left">
               <label htmlFor="speaker-name" className="block text-sm font-medium mb-2">
@@ -28,34 +64,15 @@ const SearchForm = ({ speakerName, setSpeakerName, meetingName, setMeetingName, 
                   className="pl-8"
                   value={speakerName}
                   onChange={(e) => setSpeakerName(e.target.value)}
+                  required 
                 />
               </div>
-            </div>
-
-            <div className="w-full md:w-1/3 text-left">
-              <label htmlFor="meeting-name" className="block text-sm font-medium mb-2">
-                会議
-              </label>
-              <Select value={meetingName} onValueChange={setMeetingName}>
-                <SelectTrigger id="meeting-name" className="h-12">
-                  <SelectValue placeholder="すべての会議" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">すべての会議</SelectItem>
-                  <SelectItem value="予算委員会">予算委員会</SelectItem>
-                  <SelectItem value="財政金融委員会">財政金融委員会</SelectItem>
-                  <SelectItem value="厚生労働委員会">厚生労働委員会</SelectItem>
-                  <SelectItem value="文部科学委員会">文部科学委員会</SelectItem>
-                  <SelectItem value="外交防衛委員会">外交防衛委員会</SelectItem>
-                  <SelectItem value="本会議">本会議</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium mb-2 text-left">期間</label>
-            <DatePickerWithRange date={dateRange} setDate={setDateRange} />
+            <DatePickerWithRange date={dateRange} setDate={setDateRange} required />
           </div>
 
           <div className="flex justify-end">

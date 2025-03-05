@@ -1,88 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
-import { Calendar, Search } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-
-// 検索結果のモックデータ
-const mockResults = [
-  {
-    id: 1,
-    politician: "岸田 文雄",
-    date: "2025年02月15日",
-    meeting: "本会議",
-    content: "我が国の経済成長を促進するために、デジタル化の推進と規制改革を進めてまいります。",
-    keywords: ["経済成長", "デジタル化", "規制改革"],
-  },
-  {
-    id: 2,
-    politician: "岸田 文雄",
-    date: "2025年02月10日",
-    meeting: "予算委員会",
-    content: "物価高騰対策として、エネルギー価格の抑制と生活支援策を講じていきます。",
-    keywords: ["物価高騰", "エネルギー", "生活支援"],
-  },
-  {
-    id: 3,
-    politician: "岸田 文雄",
-    date: "2025年01月25日",
-    meeting: "外交防衛委員会",
-    content: "国際社会と連携しながら、地域の平和と安定に貢献していく方針です。",
-    keywords: ["国際連携", "平和", "安定"],
-  },
-  {
-    id: 4,
-    politician: "岸田 文雄",
-    date: "2025年01月18日",
-    meeting: "本会議",
-    content: "少子化対策として、子育て支援の拡充と教育費負担の軽減を図ります。",
-    keywords: ["少子化", "子育て支援", "教育費"],
-  },
-  {
-    id: 5,
-    politician: "岸田 文雄",
-    date: "2025年01月12日",
-    meeting: "厚生労働委員会",
-    content: "医療体制の強化と社会保障制度の持続可能性を両立させる改革を進めます。",
-    keywords: ["医療体制", "社会保障", "改革"],
-  },
-];
 
 export default function SearchResults() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const [results, setResults] = useState(mockResults);
-  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
+  const { results } = location.state || { results: [] };
 
-  // URLからクエリパラメータを取得
-  const name = searchParams.get("name");
-  const meeting = searchParams.get("meeting");
-  const theme = searchParams.get("theme");
-
-  // 検索条件の表示用テキスト
-  const searchCondition = theme
-    ? `テーマ: ${theme}`
-    : name
-    ? `政治家: ${name}${meeting && meeting !== "すべての会議" ? `, 会議: ${meeting}` : ""}`
-    : "";
-
-  // 検索ボックスでのフィルタリング
-  const handleSearch = () => {
-    if (searchTerm.trim() === "") {
-      setResults(mockResults);
-    } else {
-      const filtered = mockResults.filter(
-        (item) => item.content.includes(searchTerm) || item.keywords.some((keyword) => keyword.includes(searchTerm)),
-      );
-      setResults(filtered);
-    }
-  };
-
-  // ホームに戻る
   const goToHome = () => {
     navigate("/");
   };
@@ -130,30 +59,6 @@ export default function SearchResults() {
               </TableBody>
             </Table>
           </div>
-          {/* ページネーション
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination> */}
         </div>
       </SidebarInset>
     </SidebarProvider>

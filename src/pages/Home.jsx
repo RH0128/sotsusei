@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
@@ -12,15 +13,7 @@ function App() {
   const [meetingName, setMeetingName] = useState("all");
   const [dateRange, setDateRange] = useState({ from: new Date(), to: new Date() });
   const [isSearching, setIsSearching] = useState(false);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setIsSearching(true);
-    setTimeout(() => {
-      setIsSearching(false);
-      history.push('/search-result'); // 検索結果ページへの遷移
-    }, 1000); // ダミーの非同期処理
-  };
+  const navigate = useNavigate();
 
   const goToHome = () => {
     navigate("/");
@@ -29,7 +22,7 @@ function App() {
   const breadcrumbItems = [
     { href: "#", label: "ホーム" },
   ];
-gir
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -50,7 +43,7 @@ gir
             dateRange={dateRange}
             setDateRange={setDateRange}
             isSearching={isSearching}
-            handleSearch={handleSearch}
+            setIsSearching={setIsSearching}
           />
 
           {/* テーマ別検索 */}
