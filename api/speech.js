@@ -5,13 +5,19 @@ export default async function GET(request) {
 
   try {
     // URLSearchParamsを使って、検索用のクエリパラメータ（speaker、from、until）を設定
+
     const params = new URLSearchParams({
       speaker: request.query.speaker,
       from: request.query.from,
       until: request.query.until,
     });
+
+    // console.log(3,params); もし上の処理が正しく行われているか確認したいなら、console.logを使って確認することができる
+
     //APIにリクエストを送信
-    const response = await fetch(`/api/speech?${params}`);
+    const response = await fetch(
+      `https://kokkai.ndl.go.jp/api/speech?${params}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
