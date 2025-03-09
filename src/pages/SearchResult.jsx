@@ -5,7 +5,7 @@ import { Calendar } from "lucide-react";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export default function SearchResults() {
   const navigate = useNavigate();
@@ -14,6 +14,10 @@ export default function SearchResults() {
 
   const goToHome = () => {
     navigate("/");
+  };
+
+  const handleRowClick = (result) => {
+    navigate('/chat', { state: { meeting: result.meeting, date: result.date } });
   };
 
   const breadcrumbItems = [
@@ -46,7 +50,7 @@ export default function SearchResults() {
               </TableHeader>
               <TableBody>
                 {results.map((result) => (
-                  <TableRow key={result.id}>
+                  <TableRow key={result.id} onClick={() => handleRowClick(result)} className="cursor-pointer">
                     <TableCell>
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />

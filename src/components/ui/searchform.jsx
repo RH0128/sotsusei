@@ -15,11 +15,11 @@ const SearchForm = ({ speakerName, setSpeakerName, dateRange, setDateRange, isSe
     setIsSearching(true);
 
     try {
-      // 日付のフォーマット確認
+      // 日付文字列に変換し、クエリパラメータとして使用するためのフォーマットに整理整頓
       const fromDate = dateRange?.from?.toISOString().split('T')[0] || '';
       const toDate = dateRange?.to?.toISOString().split('T')[0] || '';
 
-      // URLSearchParams でパラメータを設定
+      // URLSearchParamsを使って、検索用のクエリパラメータ（speaker、from、until）を設定
       const params = new URLSearchParams({
         speaker: speakerName,
         from: fromDate,
@@ -76,7 +76,7 @@ const SearchForm = ({ speakerName, setSpeakerName, dateRange, setDateRange, isSe
           </div>
 
           <div className="flex justify-end">
-            <Button variant="outline" type="submit" disabled={isSearching}>
+            <Button variant="default" type="submit" disabled={isSearching} className="w-full">
               {isSearching ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
