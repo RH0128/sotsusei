@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import ChatMessage from "@/components/ui/chatmessage";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
@@ -9,7 +13,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 const Chat = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { meeting, date } = location.state || { meeting: '', date: '' };
+  const { meeting, date } = location.state || { meeting: "", date: "" };
 
   const goToHome = () => {
     navigate("/");
@@ -20,25 +24,23 @@ const Chat = () => {
     { href: "#", label: "チャット" },
   ];
 
-  // ダミーデータ
-  const [messages, setMessages] = useState([
-    { id: 1, speaker: "議員A", message: "発言内容1" },
-    { id: 2, speaker: "議員B", message: "発言内容2" },
-    { id: 3, speaker: "議員C", message: "テストです。句点があったらチャットを分割したい。" },
-  ]);
+  const [messages, setMessages] = useState([]);
 
-  // 実際のデータを取得する場合は、useEffectを使用してAPIリクエストを行う
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch(`https://kokkai.ndl.go.jp/api/meeting?record_id=${meeting}&date=${date}`);
+        const response = await fetch(
+          `/api/speech?meeting=${meeting}&date=${date}`
+        );
         const data = await response.json();
-        const formattedMessages = data.records.flatMap(record => {
-          const sentences = record.speech.split('。').filter(sentence => sentence.trim() !== '');
+        const formattedMessages = data.flatMap((record) => {
+          const sentences = record.speech
+            .split("。")
+            .filter((sentence) => sentence.trim() !== "");
           return sentences.map((sentence, index) => ({
             id: `${record.id}-${index}`,
             speaker: record.speaker,
-            message: sentence + '。'
+            message: sentence + "。",
           }));
         });
         setMessages(formattedMessages);
@@ -73,7 +75,10 @@ const Chat = () => {
           {/* Chat Messages */}
           <div className="space-y-6 pb-10">
             {messages.map((msg) => (
-              <ChatMessage key={msg.id} message={`${msg.speaker}: ${msg.message}`} />
+              <ChatMessage
+                key={msg.id}
+                message={`${msg.speaker}: ${msg.message}`}
+              />
             ))}
           </div>
         </div>
