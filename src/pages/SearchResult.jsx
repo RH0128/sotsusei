@@ -2,9 +2,20 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Calendar } from "lucide-react";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 
 export default function SearchResults() {
@@ -17,12 +28,12 @@ export default function SearchResults() {
   };
 
   const handleRowClick = (result) => {
-    navigate('/chat', { state: { meeting: result.meeting, date: result.date } });
+    navigate("/chat", {
+      state: { meeting: result.meeting, date: result.date },
+    });
   };
 
-  const breadcrumbItems = [
-    { href: "#", label: "検索結果" },
-  ];
+  const breadcrumbItems = [{ href: "#", label: "検索結果" }];
 
   return (
     <SidebarProvider>
@@ -45,19 +56,29 @@ export default function SearchResults() {
               <TableHeader>
                 <TableRow>
                   <TableHead>日付</TableHead>
-                  <TableHead className="w-[50%]">会議</TableHead>
+                  <TableHead className="w-[30%]">会議</TableHead>
+                  <TableHead className="w-[20%]">議院</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {results.map((result) => (
-                  <TableRow key={result.id} onClick={() => handleRowClick(result)} className="cursor-pointer">
+                  <TableRow
+                    key={result.id}
+                    onClick={() => handleRowClick(result)}
+                    className="cursor-pointer"
+                  >
                     <TableCell>
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
                         {result.date}
                       </div>
                     </TableCell>
-                    <TableCell className="text-start">{result.meeting}</TableCell>
+                    <TableCell className="text-start">
+                      {result.nameOfMeeting}
+                    </TableCell>
+                    <TableCell className="text-start">
+                      {result.nameOfHouse}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
