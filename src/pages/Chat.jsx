@@ -13,7 +13,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 const Chat = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { meeting, date } = location.state || { meeting: "", date: "" };
+  const { speaker, date } = location.state || { speaker: "", date: "" };
 
   const goToHome = () => {
     navigate("/");
@@ -30,7 +30,7 @@ const Chat = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `/api/meeting?speaker=${meeting}&from=${date}&until=${date}`
+          `/api/meeting?speaker=${speaker}&from=${date}&until=${date}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -52,10 +52,10 @@ const Chat = () => {
       }
     };
 
-    if (meeting && date) {
+    if (speaker && date) {
       fetchMessages();
     }
-  }, [meeting, date]);
+  }, [speaker, date]);
 
   return (
     <SidebarProvider>
@@ -72,7 +72,7 @@ const Chat = () => {
           {/* Date Header */}
           <div className="text-center py-4">
             <h2 className="text-lg font-medium">{date}</h2>
-            <h3 className="text-md font-medium">{meeting}</h3>
+            <h3 className="text-md font-medium">{speaker}</h3>
           </div>
 
           {/* Chat Messages */}

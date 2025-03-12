@@ -29,7 +29,7 @@ export default function SearchResults() {
 
   const handleRowClick = (result) => {
     navigate("/chat", {
-      state: { meeting: result.meeting, date: result.date },
+      state: { speaker: result.speaker, date: result.date },
     });
   };
 
