@@ -39,7 +39,6 @@ const SearchForm = ({
       });
 
       // APIリクエストを送信
-      // fetch（`koizumi.json`); publicの配下にjsonをおく
       const response = await fetch(`/api/meeting?${params}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");

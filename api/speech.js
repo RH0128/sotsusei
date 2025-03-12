@@ -11,8 +11,12 @@ const handler = async (req, res) => {
       })}`
     );
 
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
     const data = await response.json();
-    res.json(data.speechRecord || []);
+    res.json(data.records || []); // 修正: data.speechRecord から data.records に変更
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
