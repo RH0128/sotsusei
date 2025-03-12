@@ -30,7 +30,9 @@ const Chat = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `/api/meeting?speaker=${speaker}&from=${date}&until=${date}`
+          `https://kokkai.ndl.go.jp/api/meeting?speaker=${encodeURIComponent(
+            speaker
+          )}&date=${encodeURIComponent(date)}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -61,7 +63,7 @@ const Chat = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
