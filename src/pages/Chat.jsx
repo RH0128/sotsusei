@@ -30,8 +30,11 @@ const Chat = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `/api/speech?meeting=${meeting}&date=${date}`
+          `/api/meeting?speaker=${meeting}&from=${date}&until=${date}`
         );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
         const formattedMessages = data.flatMap((record) => {
           const sentences = record.speech

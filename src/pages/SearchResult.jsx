@@ -51,7 +51,7 @@ export default function SearchResults() {
             <h1 className="text-2xl font-bold text-left">検索結果</h1>
           </div>
 
-          <div className="border rounded-lg overflow-hidden mb-6 pb-2">
+          <div className="border rounded-lg overflow-hidden mb-6">
             <Table>
               <TableHeader>
                 <TableRow>
