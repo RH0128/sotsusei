@@ -3,7 +3,7 @@ const handler = async (req, res) => {
     const { speaker, from, until } = req.query;
 
     const response = await fetch(
-      `https://kokkai.ndl.go.jp/api/speech?${new URLSearchParams({
+      `https://kokkai.ndl.go.jp/api/meeting?${new URLSearchParams({
         speaker,
         from,
         until,
