@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../App.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../App.css";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import SearchForm from "@/components/ui/searchform";
 import { Button } from "@/components/ui/button";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
@@ -11,7 +15,10 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 function App() {
   const [speakerName, setSpeakerName] = useState("");
   const [meetingName, setMeetingName] = useState("all");
-  const [dateRange, setDateRange] = useState({ from: new Date(), to: new Date() });
+  const [dateRange, setDateRange] = useState({
+    from: new Date(),
+    to: new Date(),
+  });
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
@@ -19,9 +26,7 @@ function App() {
     navigate("/");
   };
 
-  const breadcrumbItems = [
-    { href: "#", label: "ホーム" },
-  ];
+  const breadcrumbItems = []; // パンクズを空にする
 
   return (
     <SidebarProvider>
