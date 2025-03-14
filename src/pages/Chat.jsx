@@ -13,7 +13,13 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 const Chat = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { speaker, date } = location.state || { speaker: "", date: "" };
+
+  // パラメータの変更: date -> fromDate と toDate
+  const { speaker, fromDate, toDate } = location.state || {
+    speaker: "",
+    fromDate: "",
+    toDate: "",
+  };
 
   const goToHome = () => {
     navigate("/");
@@ -29,15 +35,29 @@ const Chat = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch(
-          `https://kokkai.ndl.go.jp/api/meeting?speaker=${encodeURIComponent(
-            speaker
-          )}&date=${encodeURIComponent(date)}`
+        // コンソールログの追加
+        console.log(
+          "Fetching with speaker:",
+          speaker,
+          "from:",
+          fromDate,
+          "to:",
+          toDate
         );
+
+        const params = new URLSearchParams({
+          speaker: speaker,
+          from: fromDate,
+          until: toDate,
+        });
+
+        const response = await fetch(`/api/meeting?${params}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("Fetched data:", data);
+
         const formattedMessages = data.flatMap((record) => {
           const sentences = record.speech
             .split("。")
@@ -48,16 +68,17 @@ const Chat = () => {
             message: sentence + "。",
           }));
         });
+
         setMessages(formattedMessages);
       } catch (error) {
         console.error("Error fetching messages:", error);
       }
     };
 
-    if (speaker && date) {
+    if (speaker && fromDate && toDate) {
       fetchMessages();
     }
-  }, [speaker, date]);
+  }, [speaker, fromDate, toDate]);
 
   return (
     <SidebarProvider>
@@ -73,7 +94,9 @@ const Chat = () => {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
-            <h2 className="text-lg font-medium">{date}</h2>
+            <h2 className="text-lg font-medium">
+              {fromDate} - {toDate}
+            </h2>
             <h3 className="text-md font-medium">{speaker}</h3>
           </div>
 
