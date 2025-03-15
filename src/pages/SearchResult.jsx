@@ -30,6 +30,7 @@ export default function SearchResults() {
   };
 
   const handleRowClick = (index) => {
+    console.log("Row clicked:", index); // デバッグ用ログ
     setSpeechData(results); // APIから取得したデータをコンテキストに保存
     setSelectedIndex(index); // 選択されたインデックスをコンテキストに保存
     navigate("/chat");
