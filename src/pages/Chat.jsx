@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import {
@@ -9,11 +9,13 @@ import {
 import { Separator } from "@/components/ui/separator";
 import ChatMessage from "@/components/ui/chatmessage";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { SpeechContext } from "@/context/speechContext";
 
 const Chat = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { speaker, date } = location.state || { speaker: "", date: "" };
+  const { index } = location.state || { index: 0 };
+  const { speechData } = useContext(SpeechContext);
 
   const goToHome = () => {
     navigate("/");
@@ -27,38 +29,19 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const formattedDate = new Date(date).toISOString();
-        const response = await fetch(
-          `/api/meeting?speaker=${encodeURIComponent(
-            speaker
-          )}&from=${formattedDate}&until=${formattedDate}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        const formattedMessages = data.flatMap((record) => {
-          const sentences = record.speech
-            .split("。")
-            .filter((sentence) => sentence.trim() !== "");
-          return sentences.map((sentence, index) => ({
-            id: `${record.id}-${index}`,
-            speaker: record.speaker,
-            message: sentence + "。",
-          }));
-        });
-        setMessages(formattedMessages);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
-    if (speaker && date) {
-      fetchMessages();
+    if (speechData.length > 0) {
+      const record = speechData[index];
+      const formattedMessages = record.speech
+        .split("。")
+        .filter((sentence) => sentence.trim() !== "")
+        .map((sentence, idx) => ({
+          id: `${record.id}-${idx}`,
+          speaker: record.speaker,
+          message: sentence + "。",
+        }));
+      setMessages(formattedMessages);
     }
-  }, [speaker, date]);
+  }, [speechData, index]);
 
   return (
     <SidebarProvider>
@@ -74,8 +57,10 @@ const Chat = () => {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
-            <h2 className="text-lg font-medium">{date}</h2>
-            <h3 className="text-md font-medium">{speaker}</h3>
+            <h2 className="text-lg font-medium">{speechData[index]?.date}</h2>
+            <h3 className="text-md font-medium">
+              {speechData[index]?.speaker}
+            </h3>
           </div>
 
           {/* Chat Messages */}
