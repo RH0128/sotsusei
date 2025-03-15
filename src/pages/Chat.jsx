@@ -29,18 +29,21 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    if (speechData.length > 0) {
-      const record = speechData[index];
-      const formattedMessages = record.speech
-        .split("。")
-        .filter((sentence) => sentence.trim() !== "")
-        .map((sentence, idx) => ({
-          id: `${record.id}-${idx}`,
-          speaker: record.speaker,
-          message: sentence + "。",
-        }));
-      setMessages(formattedMessages);
+    if (!speechData[index]) {
+      console.error("Invalid index or speechData is empty");
+      return;
     }
+
+    const record = speechData[index];
+    const formattedMessages = record.speech
+      .split("。")
+      .filter((sentence) => sentence.trim() !== "")
+      .map((sentence, idx) => ({
+        id: `${record.id}-${idx}`,
+        speaker: record.speaker,
+        message: sentence + "。",
+      }));
+    setMessages(formattedMessages);
   }, [speechData, index]);
 
   return (
