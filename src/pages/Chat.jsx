@@ -36,14 +36,21 @@ const Chat = () => {
     }
 
     const record = speechData[selectedIndex];
-    const formattedMessages = record.speech
-      .split("。")
-      .filter((sentence) => sentence.trim() !== "")
-      .map((sentence, idx) => ({
-        id: `${record.id}-${idx}`,
-        speaker: record.speaker,
-        message: sentence + "。",
-      }));
+    if (!record.speechRecord) {
+      console.error("Speech record is empty");
+      return;
+    }
+
+    const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
+      return speech.speech
+        .split("。")
+        .filter((sentence) => sentence.trim() !== "")
+        .map((sentence, sentenceIdx) => ({
+          id: `${speech.id}-${sentenceIdx}`,
+          speaker: speech.speaker,
+          message: sentence + "。",
+        }));
+    });
     setMessages(formattedMessages);
   }, [speechData, selectedIndex]);
 
@@ -65,7 +72,7 @@ const Chat = () => {
               {speechData[selectedIndex]?.date}
             </h2>
             <h3 className="text-md font-medium">
-              {speechData[selectedIndex]?.speaker}
+              {speechData[selectedIndex]?.nameOfHouse}
             </h3>
           </div>
 
