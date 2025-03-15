@@ -27,6 +27,9 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    console.log("Selected index:", selectedIndex); // デバッグ用ログ
+    console.log("Speech data:", speechData); // デバッグ用ログ
+
     if (!speechData[selectedIndex]) {
       console.error("Invalid index or speechData is empty");
       return;
