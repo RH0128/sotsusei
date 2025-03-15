@@ -23,7 +23,7 @@ export default function SearchResults() {
   const navigate = useNavigate();
   const location = useLocation();
   const { results } = location.state || { results: [] };
-  const { setSpeechData } = useContext(SpeechContext);
+  const { setSpeechData, setSelectedIndex } = useContext(SpeechContext);
 
   const goToHome = () => {
     navigate("/");
@@ -31,9 +31,8 @@ export default function SearchResults() {
 
   const handleRowClick = (index) => {
     setSpeechData(results); // APIから取得したデータをコンテキストに保存
-    navigate("/chat", {
-      state: { index },
-    });
+    setSelectedIndex(index); // 選択されたインデックスをコンテキストに保存
+    navigate("/chat");
   };
 
   const breadcrumbItems = [{ href: "#", label: "検索結果" }];

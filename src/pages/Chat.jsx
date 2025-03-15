@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import {
   SidebarInset,
@@ -13,9 +13,7 @@ import { SpeechContext } from "@/context/speechContext";
 
 const Chat = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { index } = location.state || { index: 0 };
-  const { speechData } = useContext(SpeechContext);
+  const { speechData, selectedIndex } = useContext(SpeechContext);
 
   const goToHome = () => {
     navigate("/");
@@ -29,12 +27,12 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    if (!speechData[index]) {
+    if (!speechData[selectedIndex]) {
       console.error("Invalid index or speechData is empty");
       return;
     }
 
-    const record = speechData[index];
+    const record = speechData[selectedIndex];
     const formattedMessages = record.speech
       .split("。")
       .filter((sentence) => sentence.trim() !== "")
@@ -44,7 +42,7 @@ const Chat = () => {
         message: sentence + "。",
       }));
     setMessages(formattedMessages);
-  }, [speechData, index]);
+  }, [speechData, selectedIndex]);
 
   return (
     <SidebarProvider>
@@ -60,9 +58,11 @@ const Chat = () => {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
-            <h2 className="text-lg font-medium">{speechData[index]?.date}</h2>
+            <h2 className="text-lg font-medium">
+              {speechData[selectedIndex]?.date}
+            </h2>
             <h3 className="text-md font-medium">
-              {speechData[index]?.speaker}
+              {speechData[selectedIndex]?.speaker}
             </h3>
           </div>
 
