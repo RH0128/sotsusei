@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import {
   SidebarInset,
@@ -9,11 +9,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import ChatMessage from "@/components/ui/chatmessage";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { SpeechContext } from "@/context/speechContext";
 
 const Chat = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { speaker, date } = location.state || { speaker: "", date: "" };
+  const { speechData, selectedIndex } = useContext(SpeechContext);
 
   const goToHome = () => {
     navigate("/");
@@ -27,37 +27,32 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch(
-          `https://kokkai.ndl.go.jp/api/meeting?speaker=${encodeURIComponent(
-            speaker
-          )}&date=${encodeURIComponent(date)}`
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        const formattedMessages = data.flatMap((record) => {
-          const sentences = record.speech
-            .split("。")
-            .filter((sentence) => sentence.trim() !== "");
-          return sentences.map((sentence, index) => ({
-            id: `${record.id}-${index}`,
-            speaker: record.speaker,
-            message: sentence + "。",
-          }));
-        });
-        setMessages(formattedMessages);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
+    console.log("Selected index:", selectedIndex); // デバッグ用ログ
+    console.log("Speech data:", speechData); // デバッグ用ログ
 
-    if (speaker && date) {
-      fetchMessages();
+    if (!speechData[selectedIndex]) {
+      console.error("Invalid index or speechData is empty");
+      return;
     }
-  }, [speaker, date]);
+
+    const record = speechData[selectedIndex];
+    if (!record.speechRecord) {
+      console.error("Speech record is empty");
+      return;
+    }
+
+    const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
+      return speech.speech
+        .split("。")
+        .filter((sentence) => sentence.trim() !== "")
+        .map((sentence, sentenceIdx) => ({
+          id: `${speech.id}-${sentenceIdx}`,
+          speaker: speech.speaker,
+          message: sentence + "。",
+        }));
+    });
+    setMessages(formattedMessages);
+  }, [speechData, selectedIndex]);
 
   return (
     <SidebarProvider>
@@ -73,8 +68,12 @@ const Chat = () => {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
-            <h2 className="text-lg font-medium">{date}</h2>
-            <h3 className="text-md font-medium">{speaker}</h3>
+            <h2 className="text-lg font-medium">
+              {speechData[selectedIndex]?.date}
+            </h2>
+            <h3 className="text-md font-medium">
+              {speechData[selectedIndex]?.nameOfHouse}
+            </h3>
           </div>
 
           {/* Chat Messages */}

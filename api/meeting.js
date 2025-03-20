@@ -16,7 +16,7 @@ const handler = async (req, res) => {
     }
 
     const data = await response.json();
-    res.json(data.meetingRecord || []); // 修正: data.speechRecord から data.records に変更
+    res.json(data.meetingRecord || []);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

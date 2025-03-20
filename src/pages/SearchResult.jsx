@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppSidebar } from "@/components/ui/app-sidebar";
 import { Calendar } from "lucide-react";
@@ -17,20 +17,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import { SpeechContext } from "@/context/speechContext";
 
 export default function SearchResults() {
   const navigate = useNavigate();
   const location = useLocation();
   const { results } = location.state || { results: [] };
+  const { setSpeechData, setSelectedIndex } = useContext(SpeechContext);
 
   const goToHome = () => {
     navigate("/");
   };
 
-  const handleRowClick = (result) => {
-    navigate("/chat", {
-      state: { speaker: result.speaker, date: result.date },
-    });
+  const handleRowClick = (index) => {
+    console.log("Row clicked:", index); // デバッグ用ログ
+    setSpeechData(results); // APIから取得したデータをコンテキストに保存
+    setSelectedIndex(index); // 選択されたインデックスをコンテキストに保存
+    navigate("/chat");
   };
 
   const breadcrumbItems = [{ href: "#", label: "検索結果" }];
@@ -61,10 +64,10 @@ export default function SearchResults() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {results.map((result) => (
+                {results.map((result, index) => (
                   <TableRow
                     key={result.id}
-                    onClick={() => handleRowClick(result)}
+                    onClick={() => handleRowClick(index)}
                     className="cursor-pointer"
                   >
                     <TableCell>
