@@ -81,7 +81,8 @@ const Chat = () => {
             {messages.map((msg) => (
               <ChatMessage
                 key={msg.id}
-                message={`${msg.speaker}: ${msg.message}`}
+                speaker={msg.speaker} // speaker プロパティを追加
+                message={msg.message}
               />
             ))}
           </div>
