@@ -10,7 +10,7 @@ const ChatMessage = ({
   isSameSpeaker,
 }) => {
   return (
-    <div className={`flex gap-${isSameSpeaker ? "2" : "3"}`}>
+    <div className={`flex gap-${isSameSpeaker ? "1" : "3"}`}>
       {showAvatar && (
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <div className="h-full w-full rounded-full bg-gray-200" />
