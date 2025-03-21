@@ -46,6 +46,7 @@ const SearchForm = ({
       }
 
       const data = await response.json();
+      console.log("API Response Data:", data); // 取得したデータをコンソールに出力
       setIsSearching(false);
 
       // 検索結果ページに遷移し、結果を渡す
