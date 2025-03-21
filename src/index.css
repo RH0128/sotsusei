@@ -6,14 +6,14 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: hsl(70, 100%, 95%);
-  --foreground: hsl(70, 5%, 0%);
-  --card: hsl(70, 50%, 90%);
+  --background: hsl(70, 50%, 90%);
+  --foreground: hsl(244, 19%, 16%);
+  --card: hsl(70, 100%, 95%);
   --card-foreground: hsl(70, 5%, 10%);
-  --popover: hsl(70, 100%, 95%);
-  --popover-foreground: hsl(70, 100%, 0%);
-  --primary: hsl(0, 0%, 0%);
-  --primary-foreground: hsl(70, 18%, 66%);
+  --popover: hsl(70, 75%, 98%);
+  --popover-foreground: hsl(0, 31%, 19%);
+  --primary: hsl(244, 19%, 16%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(70, 30%, 70%);
   --secondary-foreground: hsl(0, 0%, 0%);
   --muted: hsl(32, 30%, 85%);
@@ -26,6 +26,7 @@
   --input: hsl(70, 30%, 18%);
   --ring: hsl(70, 18%, 66%);
   --radius: 1rem;
+  --sidebar: hsl(70, 100%, 95%); /* ここに追加 */
 }
 
 .dark {
@@ -49,6 +50,7 @@
   --input: hsl(70, 30%, 18%);
   --ring: hsl(70, 18%, 66%);
   --radius: 1rem;
+  --sidebar: hsl(70, 50%, 10%); /* ダークモード用のサイドバー色 */
 }
 
 @theme inline {
@@ -86,4 +88,3 @@
     @apply bg-background text-foreground;
   }
 }
-
