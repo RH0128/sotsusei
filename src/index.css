@@ -87,8 +87,3 @@
   }
 }
 
-@layer components {
-  .custom-hover-color {
-    @apply hover: hsl(70, 50%, 80%); /* ホバー時の背景色を青色に変更 */
-  }
-}

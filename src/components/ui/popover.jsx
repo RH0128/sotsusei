@@ -7,14 +7,8 @@ function Popover({ ...props }) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />;
 }
 
-function PopoverTrigger({ className, ...props }) {
-  return (
-    <PopoverPrimitive.Trigger
-      data-slot="popover-trigger"
-      className={cn("custom-hover-color", className)} // カスタムクラスを適用
-      {...props}
-    />
-  );
+function PopoverTrigger({ ...props }) {
+  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />;
 }
 
 function PopoverContent({
