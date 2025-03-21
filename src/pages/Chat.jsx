@@ -78,11 +78,14 @@ const Chat = () => {
 
           {/* Chat Messages */}
           <div className="space-y-6 pb-10">
-            {messages.map((msg) => (
+            {messages.map((msg, index) => (
               <ChatMessage
                 key={msg.id}
-                speaker={msg.speaker} // speaker プロパティを追加
+                speaker={msg.speaker}
                 message={msg.message}
+                showSpeaker={
+                  index === 0 || messages[index - 1].speaker !== msg.speaker
+                } // showSpeaker プロパティを追加
               />
             ))}
           </div>
