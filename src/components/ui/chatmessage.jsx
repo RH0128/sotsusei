@@ -2,9 +2,15 @@ import React from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 
-const ChatMessage = ({ speaker, message, showSpeaker, showAvatar }) => {
+const ChatMessage = ({
+  speaker,
+  message,
+  showSpeaker,
+  showAvatar,
+  isSameSpeaker,
+}) => {
   return (
-    <div className="flex gap-3">
+    <div className={`flex gap-${isSameSpeaker ? "2" : "3"}`}>
       {showAvatar && (
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <div className="h-full w-full rounded-full bg-gray-200" />

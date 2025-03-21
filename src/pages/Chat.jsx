@@ -85,10 +85,13 @@ const Chat = () => {
                 message={msg.message}
                 showSpeaker={
                   index === 0 || messages[index - 1].speaker !== msg.speaker
-                } // showSpeaker プロパティを追加
+                }
                 showAvatar={
                   index === 0 || messages[index - 1].speaker !== msg.speaker
-                } // showAvatar プロパティを追加
+                }
+                isSameSpeaker={
+                  index > 0 && messages[index - 1].speaker === msg.speaker
+                } // isSameSpeaker プロパティを追加
               />
             ))}
           </div>
