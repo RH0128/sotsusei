@@ -49,6 +49,7 @@ const Chat = () => {
           id: `${speech.id}-${sentenceIdx}`,
           speaker: speech.speaker,
           message: sentence + "。",
+          speechOrder: speech.speechOrder,
         }));
     });
     setMessages(formattedMessages);
@@ -92,7 +93,7 @@ const Chat = () => {
                 isSameSpeaker={
                   index > 0 && messages[index - 1].speaker === msg.speaker
                 }
-                isLeftAligned={index % 2 === 0} // isLeftAligned プロパティを追加
+                isLeftAligned={msg.speechOrder % 2 !== 0} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
               />
             ))}
           </div>
