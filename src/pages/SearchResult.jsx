@@ -25,6 +25,8 @@ export default function SearchResults() {
   const { results } = location.state || { results: [] };
   const { setSpeechData, setSelectedIndex } = useContext(SpeechContext);
 
+  console.log("Search Results:", results); // 取得した検索結果をコンソールに出力
+
   const goToHome = () => {
     navigate("/");
   };
