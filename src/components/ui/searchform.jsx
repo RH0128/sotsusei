@@ -12,23 +12,17 @@ import { Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 
-const SearchForm = ({
-  speakerName,
-  setSpeakerName,
-  dateRange,
-  setDateRange,
-  isSearching,
-  setIsSearching,
-}) => {
+const SearchForm = () => {
+  const [speakerName, setSpeakerName] = useState("");
+  const [dateRange, setDateRange] = useState({ from: null, to: null });
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
-  // 検索処理
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setIsSearching(true);
 
     try {
-      // 日付文字列に変換し、クエリパラメータとして使用するためのフォーマットに整理整頓
       const fromDate = dateRange?.from?.toISOString().split("T")[0] || "";
       const toDate = dateRange?.to?.toISOString().split("T")[0] || "";
 
@@ -36,6 +30,7 @@ const SearchForm = ({
         speaker: speakerName,
         from: fromDate,
         until: toDate,
+        maximumRecords: 10, // ここで最大10件の検索結果を取得するように設定
       });
 
       // APIリクエストを送信
@@ -64,32 +59,29 @@ const SearchForm = ({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSearch} className="space-y-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 text-left">
-              <label
-                htmlFor="speaker-name"
-                className="block text-sm font-medium mb-2"
-              >
-                政治家のお名前
-              </label>
-              <div className="relative">
-                <Search className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="speaker-name"
-                  placeholder="例: 岸田 文雄"
-                  className="pl-8"
-                  value={speakerName}
-                  onChange={(e) => setSpeakerName(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="speakerName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              発言者名
+            </label>
+            <input
+              type="text"
+              id="speakerName"
+              value={speakerName}
+              onChange={(e) => setSpeakerName(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              required
+            />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-2 text-left">
-              期間
+          <div className="mb-4">
+            <label
+              htmlFor="dateRange"
+              className="block text-sm font-medium text-gray-700"
+            >
+              日付範囲
             </label>
             <DatePickerWithRange
               date={dateRange}
