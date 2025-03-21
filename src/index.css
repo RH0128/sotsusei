@@ -26,7 +26,12 @@
   --input: hsl(70, 30%, 18%);
   --ring: hsl(70, 18%, 66%);
   --radius: 1rem;
-  --sidebar:linear-gradient(to right, rgba(189, 231, 149, 1), rgba(242, 227, 221, 1));
+  --sidebar: linear-gradient(
+    to right,
+    rgba(189, 231, 149, 1),
+    rgba(242, 227, 221, 1)
+  );
+  --table-body-background: hsl(70, 100%, 95%); /* テーマ変数を追加 */
 }
 
 .dark {
