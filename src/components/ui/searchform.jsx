@@ -61,10 +61,7 @@ const SearchForm = () => {
       <CardContent>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              htmlFor="speakerName"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="speakerName" className="block text-sm font-medium text-gray-700">
               発言者名
             </label>
             <input
@@ -77,10 +74,7 @@ const SearchForm = () => {
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="dateRange"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="dateRange" className="block text-sm font-medium text-gray-700">
               日付範囲
             </label>
             <DatePickerWithRange
