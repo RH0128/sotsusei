@@ -2,13 +2,17 @@ import React from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 
-const ChatMessage = ({ speaker, message, showSpeaker }) => {
+const ChatMessage = ({ speaker, message, showSpeaker, showAvatar }) => {
   return (
     <div className="flex gap-3">
-      <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
-        <div className="h-full w-full rounded-full bg-gray-200" />
-      </Avatar>
-      <div className="flex flex-col items-start">
+      {showAvatar && (
+        <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
+          <div className="h-full w-full rounded-full bg-gray-200" />
+        </Avatar>
+      )}
+      <div
+        className={`flex flex-col items-start ${!showAvatar ? "ml-13" : ""}`}
+      >
         {showSpeaker && (
           <span className="text-xs font-semibold mb-1">{speaker}</span>
         )}
