@@ -16,8 +16,8 @@ function App() {
   const [speakerName, setSpeakerName] = useState("");
   const [meetingName, setMeetingName] = useState("all");
   const [dateRange, setDateRange] = useState({
-    from: new Date(),
-    to: new Date(),
+    from: new Date(new Date().setFullYear(new Date().getFullYear() - 1)), // 今日の一年前
+    to: new Date(), // 今日
   });
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();

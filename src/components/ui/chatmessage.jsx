@@ -11,7 +11,7 @@ const ChatMessage = ({
   isLeftAligned,
 }) => {
   // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替える
-  const processedMessage = message.replace(/拍手/g, "👏");
+  const processedMessage = message.replace(/拍手/g, "👏👏👏👏👏👏");
 
   return (
     <div
@@ -39,9 +39,7 @@ const ChatMessage = ({
           </span>
         )}
         <Card
-          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[85%] ${
-            isLeftAligned ? "text-left" : "text-right"
-          }`}
+          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[85%] text-left`}
         >
           <p className="text-sm">{processedMessage}</p>
         </Card>
