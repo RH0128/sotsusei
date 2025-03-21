@@ -91,7 +91,8 @@ const Chat = () => {
                 }
                 isSameSpeaker={
                   index > 0 && messages[index - 1].speaker === msg.speaker
-                } // isSameSpeaker プロパティを追加
+                }
+                isLeftAligned={index % 2 === 0} // isLeftAligned プロパティを追加
               />
             ))}
           </div>

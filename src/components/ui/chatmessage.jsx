@@ -8,16 +8,23 @@ const ChatMessage = ({
   showSpeaker,
   showAvatar,
   isSameSpeaker,
+  isLeftAligned,
 }) => {
   return (
-    <div className={`flex gap-${isSameSpeaker ? "1" : "3"}`}>
-      {showAvatar && (
+    <div
+      className={`flex ${isLeftAligned ? "justify-start" : "justify-end"} gap-${
+        isSameSpeaker ? "1" : "3"
+      }`}
+    >
+      {showAvatar && isLeftAligned && (
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <div className="h-full w-full rounded-full bg-gray-200" />
         </Avatar>
       )}
       <div
-        className={`flex flex-col items-start ${!showAvatar ? "ml-13" : ""}`}
+        className={`flex flex-col items-${isLeftAligned ? "start" : "end"} ${
+          !showAvatar ? "ml-13" : ""
+        }`}
       >
         {showSpeaker && (
           <span className="text-xs font-semibold mb-1">{speaker}</span>
@@ -26,6 +33,11 @@ const ChatMessage = ({
           <p className="text-sm">{message}</p>
         </Card>
       </div>
+      {showAvatar && !isLeftAligned && (
+        <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
+          <div className="h-full w-full rounded-full bg-gray-200" />
+        </Avatar>
+      )}
     </div>
   );
 };
