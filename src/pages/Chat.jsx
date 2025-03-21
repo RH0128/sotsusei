@@ -49,7 +49,6 @@ const Chat = () => {
           id: `${speech.id}-${sentenceIdx}`,
           speaker: speech.speaker,
           message: sentence + "。",
-          speechOrder: speech.speechOrder,
         }));
     });
     setMessages(formattedMessages);
@@ -79,23 +78,30 @@ const Chat = () => {
 
           {/* Chat Messages */}
           <div className="space-y-6 pb-10">
-            {messages.map((msg, index) => (
-              <ChatMessage
-                key={msg.id}
-                speaker={msg.speaker}
-                message={msg.message}
-                showSpeaker={
-                  index === 0 || messages[index - 1].speaker !== msg.speaker
-                }
-                showAvatar={
-                  index === 0 || messages[index - 1].speaker !== msg.speaker
-                }
-                isSameSpeaker={
-                  index > 0 && messages[index - 1].speaker === msg.speaker
-                }
-                isLeftAligned={msg.speechOrder % 2 !== 0} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
-              />
-            ))}
+            {messages.map((msg, index) => {
+              const isLeftAligned =
+                index === 0 || messages[index - 1].speaker !== msg.speaker
+                  ? !messages[index - 1]?.isLeftAligned
+                  : messages[index - 1]?.isLeftAligned;
+
+              return (
+                <ChatMessage
+                  key={msg.id}
+                  speaker={msg.speaker}
+                  message={msg.message}
+                  showSpeaker={
+                    index === 0 || messages[index - 1].speaker !== msg.speaker
+                  }
+                  showAvatar={
+                    index === 0 || messages[index - 1].speaker !== msg.speaker
+                  }
+                  isSameSpeaker={
+                    index > 0 && messages[index - 1].speaker === msg.speaker
+                  }
+                  isLeftAligned={isLeftAligned} // speakerが切り替わるごとに表示位置を変更
+                />
+              );
+            })}
           </div>
         </div>
       </SidebarInset>
