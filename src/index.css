@@ -6,7 +6,6 @@
 @custom-variant dark (&:is(.dark *));
 
 
-
 :root  {
   --background: 70 100% 95%;
   --foreground: 70 5% 0%;
