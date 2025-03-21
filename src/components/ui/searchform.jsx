@@ -36,6 +36,7 @@ const SearchForm = ({
         speaker: speakerName,
         from: fromDate,
         until: toDate,
+        maximumRecords: 10, // ここで最大10件の検索結果を取得するように設定
       });
 
       // APIリクエストを送信
