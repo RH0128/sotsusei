@@ -12,8 +12,8 @@
   --card-foreground: hsl(70, 5%, 10%);
   --popover: hsl(70, 100%, 95%);
   --popover-foreground: hsl(70, 100%, 0%);
-  --primary: hsl(70, 18%, 66%);
-  --primary-foreground: hsl(0, 0%, 0%);
+  --primary: hsl(0, 0%, 0%);
+  --primary-foreground: hsl(70, 18%, 66%);
   --secondary: hsl(70, 30%, 70%);
   --secondary-foreground: hsl(0, 0%, 0%);
   --muted: hsl(32, 30%, 85%);
@@ -84,5 +84,11 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .custom-hover-color {
+    @apply hover: hsl(70, 50%, 80%); /* ホバー時の背景色を青色に変更 */
   }
 }
