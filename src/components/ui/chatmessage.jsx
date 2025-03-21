@@ -11,7 +11,9 @@ const ChatMessage = ({
   isLeftAligned,
 }) => {
   // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替える
-  const processedMessage = message.replace(/拍手/g, "👏👏👏👏👏👏");
+  const processedMessage = message
+    .replace(/拍手/g, "👏👏👏👏👏👏")
+    .replace(/。/g, "‼️");
 
   return (
     <div

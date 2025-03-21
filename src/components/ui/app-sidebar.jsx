@@ -49,7 +49,7 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "検索",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
@@ -69,7 +69,7 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "発言回数ランキング",
       url: "#",
       icon: Bot,
       items: [
@@ -88,7 +88,7 @@ const data = {
       ],
     },
     {
-      title: "Documentation",
+      title: "投票履歴",
       url: "#",
       icon: BookOpen,
       items: [
@@ -111,7 +111,7 @@ const data = {
       ],
     },
     {
-      title: "Settings",
+      title: "設定",
       url: "#",
       icon: Settings2,
       items: [
