@@ -10,6 +10,9 @@ const ChatMessage = ({
   isSameSpeaker,
   isLeftAligned,
 }) => {
+  // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替える
+  const processedMessage = message.replace(/拍手/g, "👏");
+
   return (
     <div
       className={`flex ${isLeftAligned ? "justify-start" : "justify-end"} gap-${
@@ -40,7 +43,7 @@ const ChatMessage = ({
             isLeftAligned ? "text-left" : "text-right"
           }`}
         >
-          <p className="text-sm">{message}</p>
+          <p className="text-sm">{processedMessage}</p>
         </Card>
       </div>
       {showAvatar && !isLeftAligned && (
