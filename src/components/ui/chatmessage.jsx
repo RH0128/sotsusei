@@ -22,14 +22,24 @@ const ChatMessage = ({
         </Avatar>
       )}
       <div
-        className={`flex flex-col items-${isLeftAligned ? "start" : "end"} ${
-          !showAvatar ? (isLeftAligned ? "ml-13" : "mr-13") : ""
-        }`}
+        className={`flex flex-col ${
+          isLeftAligned ? "items-start" : "items-end"
+        } ${!showAvatar ? (isLeftAligned ? "ml-13" : "mr-13") : ""}`}
       >
         {showSpeaker && (
-          <span className="text-xs font-semibold mb-1">{speaker}</span>
+          <span
+            className={`text-xs font-semibold mb-1 ${
+              isLeftAligned ? "text-left" : "text-right"
+            }`}
+          >
+            {speaker}
+          </span>
         )}
-        <Card className="p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[85%] text-left">
+        <Card
+          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[85%] ${
+            isLeftAligned ? "text-left" : "text-right"
+          }`}
+        >
           <p className="text-sm">{message}</p>
         </Card>
       </div>
