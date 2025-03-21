@@ -23,7 +23,7 @@ const ChatMessage = ({
       )}
       <div
         className={`flex flex-col items-${isLeftAligned ? "start" : "end"} ${
-          !showAvatar ? "ml-13" : ""
+          !showAvatar ? (isLeftAligned ? "ml-13" : "mr-13") : ""
         }`}
       >
         {showSpeaker && (
