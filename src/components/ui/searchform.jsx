@@ -39,6 +39,8 @@ const SearchForm = ({
         maximumRecords: 10, // ここで最大10件の検索結果を取得するように設定
       });
 
+      console.log("API Request URL:", `/api/meeting?${params}`);
+
       // APIリクエストを送信
       const response = await fetch(`/api/meeting?${params}`);
       if (!response.ok) {
