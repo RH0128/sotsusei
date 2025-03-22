@@ -66,7 +66,7 @@ const Chat = () => {
             <Breadcrumbs items={breadcrumbItems} onHomeClick={goToHome} />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
             <h2 className="text-lg font-medium">
