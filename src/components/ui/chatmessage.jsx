@@ -3,23 +3,23 @@ import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
 
 // アイコン画像をインポート
-import Icon1 from "/img/Icon/Icon1.png";
-import Icon2 from "/img/Icon/Icon2.png";
-import Icon3 from "/img/Icon/Icon3.png";
-import Icon4 from "/img/Icon/Icon4.png";
-import Icon5 from "/img/Icon/Icon5.png";
-import Icon6 from "/img/Icon/Icon6.png";
-import Icon7 from "/img/Icon/Icon7.png";
+import Icon0 from "/img/Icon/Icon1.png";
+import Icon1 from "/img/Icon/Icon2.png";
+import Icon2 from "/img/Icon/Icon3.png";
+import Icon3 from "/img/Icon/Icon4.png";
+import Icon4 from "/img/Icon/Icon5.png";
+import Icon5 from "/img/Icon/Icon6.png";
+import Icon6 from "/img/Icon/Icon7.png";
 
 // スピーカーに対応するアイコンをマッピング
 const orderIcons = {
+  0: Icon0,
   1: Icon1,
   2: Icon2,
   3: Icon3,
   4: Icon4,
   5: Icon5,
   6: Icon6,
-  7: Icon7,
 };
 
 const ChatMessage = ({
@@ -38,7 +38,7 @@ const ChatMessage = ({
     .trimStart(); // 文頭のスペースを削除
 
   // スピーチオーダーに対応するアイコンを取得
-  const orderIcon = orderIcons[speechOrder] || Icon1; // デフォルトアイコンを設定
+  const orderIcon = orderIcons[speechOrder] || Icon0; // デフォルトアイコンを設定
 
   // speechOrder をコンソールに出力して確認
   console.log("speechOrder:", speechOrder);
