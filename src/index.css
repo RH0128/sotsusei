@@ -26,7 +26,7 @@
   --input: hsl(262, 30%, 18%);
   --ring: hsl(262, 100%, 50%);
   --sidebar: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --table-body-background: hsl(262, 100%, 80%);
+  --table-body-background: hsl(260, 50%, 98%);
   --radius: 0.5rem;
 }
 
