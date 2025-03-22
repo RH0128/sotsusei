@@ -49,7 +49,7 @@ const data = {
   ],
   navMain: [
     {
-      title: "検索",
+      title: "ホーム",
       url: "#",
       icon: SquareTerminal,
       isActive: true,

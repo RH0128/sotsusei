@@ -81,7 +81,7 @@ const SearchForm = ({
                 <Search className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="speaker-name"
-                  placeholder="例: 岸田 文雄"
+                  placeholder="例: 石破茂"
                   className="pl-8"
                   value={speakerName}
                   onChange={(e) => setSpeakerName(e.target.value)}
@@ -99,6 +99,14 @@ const SearchForm = ({
               date={dateRange}
               setDate={setDateRange}
               required
+            />
+          </div>
+
+          <div className="flex justify-center mt-6">
+            <img
+              src="/img/Character.png"
+              alt="キャラクター"
+              className="w-[330px] h-auto"
             />
           </div>
 
