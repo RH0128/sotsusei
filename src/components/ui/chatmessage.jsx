@@ -29,7 +29,7 @@ const ChatMessage = ({
   showAvatar,
   isSameSpeaker,
   isLeftAligned,
-  speachorder,
+  speechOrder,
 }) => {
   // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替え、文頭のスペースを削除
   const processedMessage = message
@@ -38,10 +38,10 @@ const ChatMessage = ({
     .trimStart(); // 文頭のスペースを削除
 
   // スピーチオーダーに対応するアイコンを取得
-  const orderIcon = orderIcons[speachorder] || Icon1; // デフォルトアイコンを設定
+  const orderIcon = orderIcons[speechOrder] || Icon1; // デフォルトアイコンを設定
 
-  // speachorder をコンソールに出力して確認
-  console.log("speachorder:", speachorder);
+  // speechOrder をコンソールに出力して確認
+  console.log("speechOrder:", speechOrder);
 
   return (
     <div
@@ -53,7 +53,7 @@ const ChatMessage = ({
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <img
             src={orderIcon}
-            alt={`Order ${speachorder} icon`}
+            alt={`Order ${speechOrder} icon`}
             className="h-full w-full rounded-full"
           />
         </Avatar>
@@ -82,7 +82,7 @@ const ChatMessage = ({
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <img
             src={orderIcon}
-            alt={`Order ${speachorder} icon`}
+            alt={`Order ${speechOrder} icon`}
             className="h-full w-full rounded-full"
           />
         </Avatar>
