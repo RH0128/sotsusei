@@ -12,14 +12,14 @@ import Icon6 from "/img/Icon/Icon6.png";
 import Icon7 from "/img/Icon/Icon7.png";
 
 // スピーカーに対応するアイコンをマッピング
-const speakerIcons = {
-  "Speaker 1": Icon1,
-  "Speaker 2": Icon2,
-  "Speaker 3": Icon3,
-  "Speaker 4": Icon4,
-  "Speaker 5": Icon5,
-  "Speaker 6": Icon6,
-  "Speaker 7": Icon7,
+const orderIcons = {
+  1: Icon1,
+  2: Icon2,
+  3: Icon3,
+  4: Icon4,
+  5: Icon5,
+  6: Icon6,
+  7: Icon7,
 };
 
 const ChatMessage = ({
@@ -29,6 +29,7 @@ const ChatMessage = ({
   showAvatar,
   isSameSpeaker,
   isLeftAligned,
+  speachorder,
 }) => {
   // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替え、文頭のスペースを削除
   const processedMessage = message
@@ -36,8 +37,8 @@ const ChatMessage = ({
     .replace(/。/g, "‼️")
     .trimStart(); // 文頭のスペースを削除
 
-  // スピーカーに対応するアイコンを取得
-  const speakerIcon = speakerIcons[speaker] || Icon1; // デフォルトアイコンを設定
+  // スピーチオーダーに対応するアイコンを取得
+  const orderIcon = orderIcons[speachorder] || Icon1; // デフォルトアイコンを設定
 
   return (
     <div
@@ -48,8 +49,8 @@ const ChatMessage = ({
       {showAvatar && isLeftAligned && (
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <img
-            src={speakerIcon}
-            alt={`${speaker} icon`}
+            src={orderIcon}
+            alt={`Order ${speachorder} icon`}
             className="h-full w-full rounded-full"
           />
         </Avatar>
@@ -77,8 +78,8 @@ const ChatMessage = ({
       {showAvatar && !isLeftAligned && (
         <Avatar className="h-10 w-10 bg-gray-200 flex-shrink-0">
           <img
-            src={speakerIcon}
-            alt={`${speaker} icon`}
+            src={orderIcon}
+            alt={`Order ${speachorder} icon`}
             className="h-full w-full rounded-full"
           />
         </Avatar>
