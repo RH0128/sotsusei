@@ -40,6 +40,9 @@ const ChatMessage = ({
   // スピーチオーダーに対応するアイコンを取得
   const orderIcon = orderIcons[speachorder] || Icon1; // デフォルトアイコンを設定
 
+  // speachorder をコンソールに出力して確認
+  console.log("speachorder:", speachorder);
+
   return (
     <div
       className={`flex ${isLeftAligned ? "justify-start" : "justify-end"} gap-${
