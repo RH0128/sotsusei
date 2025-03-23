@@ -148,7 +148,7 @@ function Sidebar({
       <div
         data-slot="sidebar"
         className={cn(
-          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col", // 背景色をテーマ変数で設定
+          "bg-[var(--sidebar)] text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col", // 背景色をテーマ変数で設定
           className
         )}
         {...props}
@@ -168,8 +168,7 @@ function Sidebar({
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
-          data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" // 背景色をテーマ変数で設定
+          className="bg-[var(--sidebar)] text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" // 背景色をテーマ変数で設定
           style={{
             "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
           }}
@@ -193,7 +192,7 @@ function Sidebar({
       {/* This is what handles the sidebar gap on desktop */}
       <div
         className={cn(
-          "relative h-svh w-(--sidebar-width) bg-sidebar transition-[width] duration-200 ease-linear",
+          "relative h-svh w-(--sidebar-width) bg-[var(--sidebar)] transition-[width] duration-200 ease-linear", // 背景色をテーマ変数で設定
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"
@@ -217,7 +216,7 @@ function Sidebar({
       >
         <div
           data-sidebar="sidebar"
-          className="bg-[var(--sidebar)] group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm" // 背景色をテーマ変数で設定
+          className="bg-[var(--sidebar)] text-sidebar-foreground flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm" // 背景色をテーマ変数で設定
         >
           {children}
         </div>
