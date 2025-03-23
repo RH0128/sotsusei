@@ -25,6 +25,7 @@ const Chat = () => {
   ];
 
   const [messages, setMessages] = useState([]);
+  const [isLeftAligned, setIsLeftAligned] = useState(false); // デフォルトではfalse
 
   useEffect(() => {
     console.log("Selected index:", selectedIndex); // デバッグ用ログ
@@ -42,18 +43,26 @@ const Chat = () => {
     }
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
-     //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
-
+      // 前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
+      let previousSpeaker = null;
 
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")
-        .map((sentence, sentenceIdx) => ({
-          id: `${speech.id}-${sentenceIdx}`,
-          speaker: speech.speaker,
-          message: sentence + "。",
-          speechOrder: speech.speechOrder,
-        }));
+        .map((sentence, sentenceIdx) => {
+          const currentSpeaker = speech.speaker;
+          if (previousSpeaker !== null && previousSpeaker !== currentSpeaker) {
+            setIsLeftAligned((prev) => !prev); // 前発言者と異なる場合は左右を切り替える
+          }
+          previousSpeaker = currentSpeaker;
+
+          return {
+            id: `${speech.id}-${sentenceIdx}`,
+            speaker: currentSpeaker,
+            message: sentence + "。",
+            isLeftAligned,
+          };
+        });
     });
     setMessages(formattedMessages);
   }, [speechData, selectedIndex]);
@@ -96,8 +105,7 @@ const Chat = () => {
                 isSameSpeaker={
                   index > 0 && messages[index - 1].speaker === msg.speaker
                 }
-                isLeftAligned={msg.speechOrder % 2 !== 0} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
-                speechOrder={msg.speechOrder} // speechOrder を渡す
+                isLeftAligned={msg.isLeftAligned} // isLeftAligned を渡す
               />
             ))}
           </div>
