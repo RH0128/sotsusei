@@ -42,6 +42,9 @@ const Chat = () => {
     }
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
+     //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
+
+
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")

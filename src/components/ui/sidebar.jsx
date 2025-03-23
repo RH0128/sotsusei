@@ -169,7 +169,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-[var(--sidebar)] text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" // 背景色をテーマ変数で設定
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden" // 背景色をテーマ変数で設定
           style={{
             "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
           }}
@@ -193,7 +193,7 @@ function Sidebar({
       {/* This is what handles the sidebar gap on desktop */}
       <div
         className={cn(
-          "relative h-svh w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
+          "relative h-svh w-(--sidebar-width) bg-sidebar transition-[width] duration-200 ease-linear",
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"

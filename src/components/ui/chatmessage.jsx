@@ -34,6 +34,7 @@ const ChatMessage = ({
   // メッセージの内容に「拍手」が含まれるときに絵文字の👏に差し替え、文頭のスペースを削除
   const processedMessage = message
     .replace(/拍手/g, "👏👏👏👏👏👏")
+    .replace(/。」/g, "」")
     .replace(/。/g, "‼️")
     .trimStart(); // 文頭のスペースを削除
 
@@ -59,7 +60,7 @@ const ChatMessage = ({
         </Avatar>
       )}
       <div
-        className={`flex flex-col ${
+        className={`flex flex-col flex-auto ${
           isLeftAligned ? "items-start" : "items-end"
         } ${!showAvatar ? (isLeftAligned ? "ml-13" : "mr-13") : ""}`}
       >
@@ -73,7 +74,7 @@ const ChatMessage = ({
           </span>
         )}
         <Card
-          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[85%] text-left`}
+          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[70%] text-left`}
         >
           <p className="text-sm">{processedMessage}</p>
         </Card>
