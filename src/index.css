@@ -25,7 +25,7 @@
   --border: hsl(261, 48%, 73%);
   --input: hsl(262, 30%, 18%);
   --ring: hsl(262, 100%, 50%);
-  --sidebar: linear-gradient(to right, #fde8e4, #d6c9e5); /* グラデーションを設定 */
+  --sidebar: bg-linear-(to right, #fde8e4, #d6c9e5); /* グラデーションを設定 */
   --table-body-background: hsl(260, 50%, 98%);
   --radius: 0.5rem;
 }
