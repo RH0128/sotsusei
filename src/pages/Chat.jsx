@@ -52,6 +52,7 @@ const Chat = () => {
           if (previousSpeaker !== null && previousSpeaker !== currentSpeaker) {
             setIsLeftAligned((prev) => !prev); // 前発言者と異なる場合は左右を切り替える
           }
+        
           previousSpeaker = currentSpeaker;
 
           return {
