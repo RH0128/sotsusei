@@ -61,6 +61,11 @@ const SearchForm = ({
 
   return (
     <Card className="mb-8">
+      <img
+        src="/img/Logo.svg"
+        alt="のぞこっかい"
+        className="h-auto w-[320px] md:w-[280px]"
+      />
       <CardHeader>
         <CardTitle>調べてみよう</CardTitle>
         <CardDescription className="pt-1">
