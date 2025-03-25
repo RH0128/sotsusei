@@ -59,39 +59,45 @@ export default function SearchResults() {
           </div>
 
           <div className="border rounded-lg overflow-hidden mb-6">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>日付</TableHead>
-                  <TableHead className="w-[30%]">会議</TableHead>
-                  <TableHead className="w-[20%]">議院</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {results.map((result, index) => (
-                  <TableRow
-                    key={result.id}
-                    onClick={() => handleRowClick(index)}
-                    className="cursor-pointer"
-                  >
-                    <TableCell>
-                      <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
-                        {format(new Date(result.date), "yyyy年M月d日", {
-                          locale: ja,
-                        })}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-start">
-                      {result.nameOfMeeting}
-                    </TableCell>
-                    <TableCell className="text-start">
-                      {result.nameOfHouse}
-                    </TableCell>
+            {results.length === 0 ? (
+              <div className="p-4 text-center text-muted-foreground">
+                該当する検索結果がありませんでした
+              </div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>日付</TableHead>
+                    <TableHead className="w-[30%]">会議</TableHead>
+                    <TableHead className="w-[20%]">議院</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {results.map((result, index) => (
+                    <TableRow
+                      key={result.id}
+                      onClick={() => handleRowClick(index)}
+                      className="cursor-pointer"
+                    >
+                      <TableCell>
+                        <div className="flex items-center">
+                          <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
+                          {format(new Date(result.date), "yyyy年M月d日", {
+                            locale: ja,
+                          })}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-start">
+                        {result.nameOfMeeting}
+                      </TableCell>
+                      <TableCell className="text-start">
+                        {result.nameOfHouse}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </div>
         </div>
       </SidebarInset>
