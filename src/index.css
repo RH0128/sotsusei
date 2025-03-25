@@ -5,6 +5,8 @@
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:is(.dark *));
 
+@import url("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap");
+
 :root {
   --background: hsl(262, 100%, 95%);
   --foreground: hsl(262, 5%, 0%);
@@ -88,7 +90,6 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Zen Kaku Gothic New", sans-serif;
   }
 }
-
-
