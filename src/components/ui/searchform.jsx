@@ -61,15 +61,17 @@ const SearchForm = ({
 
   return (
     <Card className="mb-8">
-      <img
-        src="/img/Logo.svg"
-        alt="のぞこっかい"
-        className="h-auto w-[320px] md:w-[280px]"
-      />
+      <div className="flex justify-center items-center">
+        <img
+          src="/img/Logo.svg"
+          alt="のぞこっかい"
+          className="h-auto w-[320px] md:w-[280px]"
+        />
+      </div>
       <CardHeader>
-        <CardTitle>調べてみよう</CardTitle>
+        {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
         <CardDescription className="pt-1">
-          あの人は国会でどんなこと言ってる？
+          気になる国会、ちょっとのぞこっかい
         </CardDescription>
       </CardHeader>
       <CardContent>
