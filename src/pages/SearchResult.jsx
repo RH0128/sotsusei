@@ -40,7 +40,11 @@ export default function SearchResults() {
     navigate("/chat");
   };
 
-  const breadcrumbItems = [{ href: "#", label: "検索結果" }];
+  const handleBreadcrumbClick = (href) => {
+    navigate(href);
+  };
+
+  const breadcrumbItems = [{ href: "/search-result", label: "検索結果" }];
 
   return (
     <SidebarProvider>
@@ -50,7 +54,10 @@ export default function SearchResults() {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumbs items={breadcrumbItems} onHomeClick={goToHome} />
+            <Breadcrumbs
+              items={breadcrumbItems}
+              onHomeClick={handleBreadcrumbClick}
+            />
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

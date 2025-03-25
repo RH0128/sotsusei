@@ -19,9 +19,13 @@ const Chat = () => {
     navigate("/");
   };
 
+  const handleBreadcrumbClick = (href) => {
+    navigate(href);
+  };
+
   const breadcrumbItems = [
-    { href: "#", label: "検索結果" },
-    { href: "#", label: "チャット" },
+    { href: "/search-result", label: "検索結果" },
+    { href: "/chat", label: "チャット" },
   ];
 
   const [messages, setMessages] = useState([]);
@@ -42,8 +46,7 @@ const Chat = () => {
     }
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
-     //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
-
+      //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
 
       return speech.speech
         .split("。")
@@ -66,7 +69,11 @@ const Chat = () => {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumbs items={breadcrumbItems} onHomeClick={goToHome} />
+            <Breadcrumbs
+              items={breadcrumbItems}
+              onHomeClick={goToHome}
+              onBreadcrumbClick={handleBreadcrumbClick}
+            />
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 pt-0">
