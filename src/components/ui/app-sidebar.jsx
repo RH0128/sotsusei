@@ -32,19 +32,19 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Tset User",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      // plan: "Enterprise",
     },
     {
-      name: "Acme Corp.",
+      name: "Test User2",
       logo: AudioWaveform,
-      plan: "Startup",
+      // plan: "Startup",
     },
     {
-      name: "Evil Corp.",
+      name: "Test User3",
       logo: Command,
-      plan: "Free",
+      // plan: "Free",
     },
   ],
   navMain: [
@@ -55,15 +55,11 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "お名前検索",
           url: "#",
         },
         {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
+          title: "キーワード検索",
           url: "#",
         },
       ],
