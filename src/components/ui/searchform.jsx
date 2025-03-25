@@ -60,8 +60,8 @@ const SearchForm = ({
   };
 
   return (
-    <Card className="mb-8">
-      <div className="flex justify-center items-center">
+    <Card className="mb-8 gap-3">
+      <div className="flex justify-center items-center pt-6">
         <img
           src="/img/Logo.svg"
           alt="のぞこっかい"
@@ -70,7 +70,7 @@ const SearchForm = ({
       </div>
       <CardHeader>
         {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
-        <CardDescription className="pt-1">
+        <CardDescription>
           気になる国会、ちょっとのぞこっかい
         </CardDescription>
       </CardHeader>
