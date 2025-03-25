@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/table";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { SpeechContext } from "@/context/speechContext";
+import { format } from "date-fns";
+import ja from "date-fns/locale/ja"; // 日本語ロケールをインポート
 
 export default function SearchResults() {
   const navigate = useNavigate();
@@ -75,7 +77,9 @@ export default function SearchResults() {
                     <TableCell>
                       <div className="flex items-center">
                         <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
-                        {result.date}
+                        {format(new Date(result.date), "yyyy年M月d日", {
+                          locale: ja,
+                        })}
                       </div>
                     </TableCell>
                     <TableCell className="text-start">
