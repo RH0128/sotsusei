@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   const apiUrl = `https://kokkai.ndl.go.jp/api/speech?any=${encodeURIComponent(
     any
-  )}&from=${from}&until=${until}&maximumRecords=${maximumRecords}`;
+  )}&from=${from}&until=${until}&maximumRecords=${maximumRecords}&recordPacking=json`;
 
   try {
     const response = await fetch(apiUrl);
