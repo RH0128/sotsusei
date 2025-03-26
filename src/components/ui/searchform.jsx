@@ -70,7 +70,7 @@ const SearchForm = ({
       </div>
       <CardHeader>
         {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
-        <CardDescription className="font-semibold">
+        <CardDescription className="font-semibold text-foreground">
           気になる国会、ちょっとのぞこっかい
         </CardDescription>
       </CardHeader>
