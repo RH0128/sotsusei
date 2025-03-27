@@ -37,6 +37,13 @@ export default function SearchResults() {
 
   const handleRowClick = (index) => {
     console.log("Row clicked:", index); // デバッグ用ログ
+
+    const selectedData = results[index];
+    if (!selectedData || !selectedData.speech) {
+      console.error("Speech record is empty or invalid");
+      return;
+    }
+
     setSpeechData(results); // APIから取得したデータをコンテキストに保存
     setSelectedIndex(index); // 選択されたインデックスをコンテキストに保存
     navigate("/chat");
