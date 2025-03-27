@@ -24,24 +24,12 @@ import ja from "date-fns/locale/ja"; // 日本語ロケールをインポート
 export default function SearchResults() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { results } = location.state || { results: [] }; // `state` から `results` を取得
   const { setSpeechData, setSelectedIndex } = useContext(SpeechContext);
 
-  const results = [
-    {
-      id: "1",
-      date: "2024-06-12",
-      nameOfMeeting: "会議名1",
-      nameOfHouse: "議院名1",
-    },
-    {
-      id: "2",
-      date: "2024-06-13",
-      nameOfMeeting: "会議名2",
-      nameOfHouse: "議院名2",
-    },
-  ];
-
   console.log("Search Results:", results); // デバッグ用に取得した結果を確認
+  console.log("Is Array:", Array.isArray(results));
+  console.log("Results Length:", results.length);
 
   const goToHome = () => {
     navigate("/");
