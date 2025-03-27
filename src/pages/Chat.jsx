@@ -53,6 +53,10 @@ const Chat = () => {
         .filter((sentence) => sentence.trim() !== "")
         .map((sentence, sentenceIdx) => {
           const isSameSpeaker = previousSpeaker === speech.speaker;
+          console.log("Previous Speaker:", previousSpeaker);
+          console.log("Current Speaker:", speech.speaker);
+          console.log("Is Same Speaker:", isSameSpeaker);
+
           previousSpeaker = speech.speaker; // 現在の発言者を前発言者として保存
 
           return {
