@@ -45,19 +45,26 @@ const Chat = () => {
       return;
     }
 
-    const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
-      //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
+    let previousSpeaker = null; // 前発言者を追跡する変数
 
+    const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")
-        .map((sentence, sentenceIdx) => ({
-          id: `${speech.id}-${sentenceIdx}`,
-          speaker: speech.speaker,
-          message: sentence + "。",
-          speechOrder: speech.speechOrder,
-        }));
+        .map((sentence, sentenceIdx) => {
+          const isSameSpeaker = previousSpeaker === speech.speaker;
+          previousSpeaker = speech.speaker; // 現在の発言者を前発言者として保存
+
+          return {
+            id: `${speech.speechID}-${sentenceIdx}`,
+            speaker: speech.speaker,
+            message: sentence + "。",
+            speechOrder: speech.speechOrder,
+            isLeftAligned: !isSameSpeaker, // 発言者が切り替わった場合に左右を切り替える
+          };
+        });
     });
+
     setMessages(formattedMessages);
   }, [speechData, selectedIndex]);
 
