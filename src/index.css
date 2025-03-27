@@ -19,7 +19,7 @@
   --secondary: hsl(262, 30%, 70%);
   --secondary-foreground: hsl(0, 0%, 0%);
   --muted: hsl(224, 30%, 85%);
-  --muted-foreground: hsl(262, 5%, 35%);
+  --muted-foreground: hsl(262, 5%, 60%);
   --accent: hsl(224, 30%, 80%);
   --accent-foreground: hsl(262, 5%, 10%);
   --destructive: hsl(0, 100%, 30%);
