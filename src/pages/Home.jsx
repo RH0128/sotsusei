@@ -51,36 +51,6 @@ function App() {
             setIsSearching={setIsSearching}
           />
 
-          {/* テーマ別検索 */}
-          <div>
-            <h2 className="font-medium mb-4">テーマ別で検索してみよう</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                憲法改正
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                年金制度
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                社会保障
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                外交・安全保障
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                子ども・子育て政策
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                夫婦別性
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                経済政策
-              </Button>
-              <Button variant="outline" className="h-12 px-4 font-normal">
-                パーティー券
-              </Button>
-            </div>
-          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

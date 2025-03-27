@@ -65,12 +65,12 @@ const SearchForm = ({
         <img
           src="/img/Logo.svg"
           alt="のぞこっかい"
-          className="h-auto w-[320px] md:w-[280px]"
+          className="h-auto w-[280px] md:w-[320px]"
         />
       </div>
       <CardHeader>
         {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
-        <CardDescription className="font-semibold">
+        <CardDescription className="font-semibold text-background">
           気になる国会、ちょっとのぞこっかい
         </CardDescription>
       </CardHeader>
