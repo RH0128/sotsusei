@@ -24,10 +24,10 @@ import ja from "date-fns/locale/ja"; // 日本語ロケールをインポート
 export default function SearchResults() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { results } = location.state || { results: [] };
+  const { results } = location.state || { results: [] }; // `state` から `results` を取得
   const { setSpeechData, setSelectedIndex } = useContext(SpeechContext);
 
-  console.log("Search Results:", results); // 取得した検索結果をコンソールに出力
+  console.log("Search Results:", results); // デバッグ用に取得した結果を確認
 
   const goToHome = () => {
     navigate("/");
@@ -38,10 +38,6 @@ export default function SearchResults() {
     setSpeechData(results); // APIから取得したデータをコンテキストに保存
     setSelectedIndex(index); // 選択されたインデックスをコンテキストに保存
     navigate("/chat");
-  };
-
-  const handleBreadcrumbClick = (href) => {
-    navigate(href);
   };
 
   const breadcrumbItems = [{ href: "/search-result", label: "検索結果" }];
