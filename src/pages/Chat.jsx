@@ -60,7 +60,7 @@ const Chat = () => {
             speaker: speech.speaker,
             message: sentence + "。",
             speechOrder: speech.speechOrder,
-            isLeftAligned: !isSameSpeaker, // 発言者が切り替わった場合に左右を切り替える
+            isLeftAligned: !isSameSpeaker && previousSpeaker !== null, // 発言者が切り替わった場合に左右を切り替える
           };
         });
     });
