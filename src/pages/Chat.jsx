@@ -40,24 +40,30 @@ const Chat = () => {
     }
 
     const record = speechData[selectedIndex];
-    if (!record.speechRecord) {
+    console.log("Record:", record); // デバッグ用ログ
+    console.log("Speech Record:", record.speechRecord); // speechRecord の中身を確認
+
+    if (!record.speechRecord || record.speechRecord.length === 0) {
       console.error("Speech record is empty");
+      setMessages([
+        { id: "error", speaker: "システム", message: "発言記録がありません。" },
+      ]);
       return;
     }
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
-      //前発言者を常に保存しておいて、次の発言者と比較。ただし1人目は前発言者がいないので、その場合は前発言者を保存しない
-
+      console.log("Speech Entry:", speech); // 各 speech エントリを確認
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")
         .map((sentence, sentenceIdx) => ({
-          id: `${speech.id}-${sentenceIdx}`,
+          id: `${speech.speechID}-${sentenceIdx}`,
           speaker: speech.speaker,
           message: sentence + "。",
           speechOrder: speech.speechOrder,
         }));
     });
+
     setMessages(formattedMessages);
   }, [speechData, selectedIndex]);
 
