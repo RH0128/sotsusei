@@ -49,9 +49,15 @@ function App() {
 
       const data = await response.json();
       console.log("API Response Data:", data);
+
+      // 必要なデータを抽出
+      const results = Array.isArray(data.speechRecord) ? data.speechRecord : [];
+      console.log("Extracted Results:", results);
+
       setIsSearching(false);
 
-      navigate("/search-result", { state: { results: data } });
+      // 検索結果ページに遷移
+      navigate("/search-result", { state: { results } });
     } catch (error) {
       console.error("Error fetching data:", error);
       setIsSearching(false);
