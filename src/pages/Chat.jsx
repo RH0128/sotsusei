@@ -45,9 +45,11 @@ const Chat = () => {
     let currentSpeaker = null;
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
+      console.log(currentSpeaker, speech.speaker);
       if (currentSpeaker !== null && currentSpeaker !== speech.speaker) {
         isLeftSide = !isLeftSide;
       }
+
       currentSpeaker = speech.speaker;
 
       return speech.speech
