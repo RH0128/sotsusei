@@ -8,6 +8,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      mode="range" // 範囲選択モードを有効化
       className={cn("p-3", className)}
       classNames={{
         months: "flex flex-col sm:flex-row gap-4",
@@ -34,8 +35,10 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }) {
         day_today: "bg-accent text-accent-foreground",
         day_outside: "text-muted-foreground opacity-50",
         day_disabled: "text-muted-foreground opacity-50",
-        day_range_middle:
-          "aria-selected:bg-accent aria-selected:text-accent-foreground",
+        day_range_middle: "bg-accent text-accent-foreground", // 範囲内の日付のスタイル
+        day_range_start:
+          "bg-primary text-primary-foreground first:rounded-l-md", // 範囲の開始日
+        day_range_end: "bg-primary text-primary-foreground last:rounded-r-md", // 範囲の終了日
         day_hidden: "invisible",
         ...classNames,
       }}
