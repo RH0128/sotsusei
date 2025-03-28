@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 
-const SearchForm = ({
-  speakerName,
-  setSpeakerName,
-  dateRange,
-  setDateRange,
-  isSearching,
-  setIsSearching,
-}) => {
+const SearchForm = ({ speakerName, setSpeakerName, dateRange, setDateRange, isSearching, setIsSearching }) => {
   const navigate = useNavigate();
 
   // 検索処理
@@ -62,26 +49,17 @@ const SearchForm = ({
   return (
     <Card className="mb-8 gap-3">
       <div className="flex justify-center items-center pt-6 pb-3">
-        <img
-          src="/img/Logo.svg"
-          alt="のぞこっかい"
-          className="h-auto w-[280px] md:w-[320px]"
-        />
+        <img src="/img/Logo.svg" alt="のぞこっかい" className="h-auto w-[280px] md:w-[320px]" />
       </div>
       <CardHeader>
         {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
-        <CardDescription className="font-semibold text-foreground">
-          気になる国会、ちょっとのぞこっかい
-        </CardDescription>
+        <CardDescription className="font-semibold text-foreground">気になる国会、ちょっとのぞこっかい</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSearch} className="space-y-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 text-left">
-              <label
-                htmlFor="speaker-name"
-                className="block text-sm font-medium mb-2"
-              >
+              <label htmlFor="speaker-name" className="block text-sm font-medium mb-2">
                 政治家のお名前
               </label>
               <div className="relative">
@@ -99,31 +77,16 @@ const SearchForm = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2 text-left">
-              期間
-            </label>
-            <DatePickerWithRange
-              date={dateRange}
-              setDate={setDateRange}
-              required
-            />
+            <label className="block text-sm font-medium mb-2 text-left">期間</label>
+            <DatePickerWithRange date={dateRange} setDate={setDateRange} required />
           </div>
 
           <div className="flex justify-center mt-6">
-            <img
-              src="/img/Character.png"
-              alt="キャラクター"
-              className="w-[330px] h-auto"
-            />
+            <img src="/img/Character.png" alt="キャラクター" className="w-[330px] h-auto" />
           </div>
 
           <div className="flex justify-end">
-            <Button
-              variant="default"
-              type="submit"
-              disabled={isSearching}
-              className="w-full"
-            >
+            <Button variant="default" type="submit" disabled={isSearching} className="w-full">
               {isSearching ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
