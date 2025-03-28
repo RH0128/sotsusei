@@ -76,13 +76,14 @@ const ChatMessage = ({
         )}
         <Card
           className={cn(
-            "p-4 rounded-2xl max-w-[75%] text-left font-light",
+            "p-4 rounded-2xl max-w-[75%] text-left",
             isLeftAligned
               ? "bg-primary text-primary-foreground" // 左揃え時のスタイル
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
           )}
         >
-          <p className="text-sm">{processedMessage}</p>
+          <p className="text-sm font-light">{processedMessage}</p>{" "}
+          {/* font-light を追加 */}
         </Card>
       </div>
       {showAvatar && !isLeftAligned && (

@@ -1,5 +1,11 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Link } from "react-router-dom";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { ChevronRight } from "lucide-react";
 
 const Breadcrumbs = ({ items, onHomeClick }) => {
@@ -7,9 +13,9 @@ const Breadcrumbs = ({ items, onHomeClick }) => {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="#" onClick={onHomeClick}>
+          <Link to="/" onClick={onHomeClick} className="hover:underline">
             ホーム
-          </BreadcrumbLink>
+          </Link>
         </BreadcrumbItem>
         {items.map((item, index) => (
           <React.Fragment key={index}>
@@ -17,7 +23,9 @@ const Breadcrumbs = ({ items, onHomeClick }) => {
               <ChevronRight className="h-4 w-4" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+              <Link to={item.href} className="hover:underline">
+                {item.label}
+              </Link>
             </BreadcrumbItem>
           </React.Fragment>
         ))}
