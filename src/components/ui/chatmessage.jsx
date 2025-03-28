@@ -40,7 +40,7 @@ const ChatMessage = ({
     .trimStart(); // 文頭のスペースを削除
 
   // スピーチオーダーに対応するアイコンを取得
-  const orderIcon = orderIcons[speechOrder] || Icon0; // デフォルトアイコンを設定
+  const orderIcon = orderIcons[speechOrder % 7] || Icon0; // 7で割った余りを使用してアイコンを取得
 
   // speechOrder をコンソールに出力して確認
   console.log("speechOrder:", speechOrder);
@@ -76,7 +76,7 @@ const ChatMessage = ({
         )}
         <Card
           className={cn(
-            "p-4 rounded-2xl max-w-[75%] text-left",
+            "p-4 rounded-2xl max-w-[75%] text-left font-normal",
             isLeftAligned
               ? "bg-primary text-primary-foreground" // 左揃え時のスタイル
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
