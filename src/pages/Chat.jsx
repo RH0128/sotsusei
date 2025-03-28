@@ -112,9 +112,11 @@ const Chat = () => {
                   index === 0 || messages[index - 1].speaker !== msg.speaker
                 }
                 isSameSpeaker={
-                  index > 0 && messages[index - 1].speaker === msg.speaker
+                  index > 0 && messages[index - 1].speaker === msg.speaker // 前のメッセージと比較して同じ発言者か判定
                 }
-                isLeftAligned={msg.isLeftAligned} // isLeftAligned プロパティを使用
+                isLeftAligned={
+                  index === 0 || messages[index - 1].speaker !== msg.speaker // 発言者が切り替わった場合に左右を切り替える
+                }
               />
             ))}
           </div>
