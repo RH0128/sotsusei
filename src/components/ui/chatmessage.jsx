@@ -76,7 +76,7 @@ const ChatMessage = ({
         )}
         <Card
           className={cn(
-            "p-4 rounded-2xl max-w-[75%] text-left font-normal",
+            "p-4 rounded-2xl max-w-[75%] text-left font-light",
             isLeftAligned
               ? "bg-primary text-primary-foreground" // 左揃え時のスタイル
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
