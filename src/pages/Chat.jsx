@@ -49,7 +49,7 @@ const Chat = () => {
       if (currentSpeaker !== null && currentSpeaker !== speech.speaker) {
         isLeftSide = !isLeftSide;
       }
-
+      console.log(isLeftSide);
       currentSpeaker = speech.speaker;
 
       return speech.speech
