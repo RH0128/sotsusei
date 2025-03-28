@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,16 +36,19 @@ const SearchForm = ({
         speaker: speakerName,
         from: fromDate,
         until: toDate,
+        maximumRecords: 10, // ここで最大10件の検索結果を取得するように設定
       });
 
+      console.log("API Request URL:", `/api/meeting?${params}`);
+
       // APIリクエストを送信
-      // fetch（`koizumi.json`); publicの配下にjsonをおく
-      const response = await fetch(`/api/speech?${params}`);
+      const response = await fetch(`/api/meeting?${params}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
+      console.log("API Response Data:", data); // 取得したデータをコンソールに出力
       setIsSearching(false);
 
       // 検索結果ページに遷移し、結果を渡す
@@ -57,11 +60,18 @@ const SearchForm = ({
   };
 
   return (
-    <Card className="mb-8">
+    <Card className="mb-8 gap-3">
+      <div className="flex justify-center items-center pt-6 pb-3">
+        <img
+          src="/img/Logo.svg"
+          alt="のぞこっかい"
+          className="h-auto w-[280px] md:w-[320px]"
+        />
+      </div>
       <CardHeader>
-        <CardTitle>調べてみよう</CardTitle>
-        <CardDescription className="pt-1">
-          あの人は国会でどんなこと言ってる？
+        {/* <CardTitle>気になる国会、ちょっとのぞこっかい</CardTitle> */}
+        <CardDescription className="font-semibold text-foreground pb-3">
+          気になる国会、ちょっとのぞこっかい
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -78,7 +88,7 @@ const SearchForm = ({
                 <Search className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="speaker-name"
-                  placeholder="例: 岸田 文雄"
+                  placeholder="例: 石破茂"
                   className="pl-8"
                   value={speakerName}
                   onChange={(e) => setSpeakerName(e.target.value)}
@@ -96,6 +106,14 @@ const SearchForm = ({
               date={dateRange}
               setDate={setDateRange}
               required
+            />
+          </div>
+
+          <div className="flex justify-center mt-6">
+            <img
+              src="/img/Character.png"
+              alt="キャラクター"
+              className="w-[330px] h-auto"
             />
           </div>
 
