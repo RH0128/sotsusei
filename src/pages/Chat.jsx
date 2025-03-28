@@ -19,9 +19,13 @@ const Chat = () => {
     navigate("/");
   };
 
+  const handleBreadcrumbClick = (href) => {
+    navigate(href);
+  };
+
   const breadcrumbItems = [
-    { href: "#", label: "検索結果" },
-    { href: "#", label: "チャット" },
+    { href: "/search-result", label: "検索結果" },
+    { href: "/chat", label: "チャット" },
   ];
 
   const [messages, setMessages] = useState([]);
@@ -41,16 +45,30 @@ const Chat = () => {
       return;
     }
 
+    let previousSpeaker = null; // 前発言者を追跡する変数
+
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")
-        .map((sentence, sentenceIdx) => ({
-          id: `${speech.id}-${sentenceIdx}`,
-          speaker: speech.speaker,
-          message: sentence + "。",
-        }));
+        .map((sentence, sentenceIdx) => {
+          const isSameSpeaker = previousSpeaker === speech.speaker;
+          console.log("Previous Speaker:", previousSpeaker);
+          console.log("Current Speaker:", speech.speaker);
+          console.log("Is Same Speaker:", isSameSpeaker);
+
+          previousSpeaker = speech.speaker; // 現在の発言者を前発言者として保存
+
+          return {
+            id: `${speech.speechID}-${sentenceIdx}`,
+            speaker: speech.speaker,
+            message: sentence + "。",
+            speechOrder: speech.speechOrder,
+            isLeftAligned: !isSameSpeaker && previousSpeaker !== null, // 発言者が切り替わった場合に左右を切り替える
+          };
+        });
     });
+
     setMessages(formattedMessages);
   }, [speechData, selectedIndex]);
 
@@ -62,10 +80,14 @@ const Chat = () => {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumbs items={breadcrumbItems} onHomeClick={goToHome} />
+            <Breadcrumbs
+              items={breadcrumbItems}
+              onHomeClick={goToHome}
+              onBreadcrumbClick={handleBreadcrumbClick}
+            />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 pt-0">
           {/* Date Header */}
           <div className="text-center py-4">
             <h2 className="text-lg font-medium">
@@ -78,10 +100,21 @@ const Chat = () => {
 
           {/* Chat Messages */}
           <div className="space-y-6 pb-10">
-            {messages.map((msg) => (
+            {messages.map((msg, index) => (
               <ChatMessage
                 key={msg.id}
-                message={`${msg.speaker}: ${msg.message}`}
+                speaker={msg.speaker}
+                message={msg.message}
+                showSpeaker={
+                  index === 0 || messages[index - 1].speaker !== msg.speaker
+                }
+                showAvatar={
+                  index === 0 || messages[index - 1].speaker !== msg.speaker
+                }
+                isSameSpeaker={
+                  index > 0 && messages[index - 1].speaker === msg.speaker
+                }
+                isLeftAligned={msg.isLeftAligned} // isLeftAligned プロパティを使用
               />
             ))}
           </div>

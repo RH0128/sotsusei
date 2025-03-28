@@ -32,44 +32,40 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Tset User",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      // plan: "Enterprise",
     },
     {
-      name: "Acme Corp.",
+      name: "Test User2",
       logo: AudioWaveform,
-      plan: "Startup",
+      // plan: "Startup",
     },
     {
-      name: "Evil Corp.",
+      name: "Test User3",
       logo: Command,
-      plan: "Free",
+      // plan: "Free",
     },
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "ホーム",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "お名前検索",
           url: "#",
         },
         {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
+          title: "キーワード検索",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "発言回数ランキング",
       url: "#",
       icon: Bot,
       items: [
@@ -88,7 +84,7 @@ const data = {
       ],
     },
     {
-      title: "Documentation",
+      title: "投票履歴",
       url: "#",
       icon: BookOpen,
       items: [
@@ -111,7 +107,7 @@ const data = {
       ],
     },
     {
-      title: "Settings",
+      title: "設定",
       url: "#",
       icon: Settings2,
       items: [
@@ -134,23 +130,6 @@ const data = {
       ],
     },
   ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
 };
 
 export function AppSidebar(props) {
@@ -161,11 +140,9 @@ export function AppSidebar(props) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        {data.projects && <NavProjects projects={data.projects} />}
       </SidebarContent>
-      <SidebarFooter>
-        {/* <NavUser user={data.user} /> */}
-      </SidebarFooter>
+      <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

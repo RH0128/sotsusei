@@ -1,12 +1,13 @@
 const handler = async (req, res) => {
   try {
-    const { speaker, from, until } = req.query;
+    const { speaker, from, until, maximumRecords } = req.query;
 
     const response = await fetch(
       `https://kokkai.ndl.go.jp/api/meeting?${new URLSearchParams({
         speaker,
         from,
         until,
+        maximumRecords,
         recordPacking: "json",
       })}`
     );
@@ -16,6 +17,7 @@ const handler = async (req, res) => {
     }
 
     const data = await response.json();
+    console.log("API Response Data:", data); // 取得したデータをコンソールに出力
     res.json(data.meetingRecord || []);
   } catch (error) {
     res.status(500).json({ error: error.message });
