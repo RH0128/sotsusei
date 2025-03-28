@@ -78,7 +78,7 @@ const ChatMessage = ({
           className={cn(
             "p-4 rounded-2xl max-w-[75%] text-left",
             isLeftAligned
-              ? "bg-[hsl(262,100%,50%)] text-[hsl(262,5%,90%)]" // 左揃え時のスタイル
+              ? "bg-primary text-primary-foreground" // 左揃え時のスタイル
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
           )}
         >
