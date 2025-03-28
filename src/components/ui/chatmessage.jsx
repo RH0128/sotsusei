@@ -82,7 +82,7 @@ const ChatMessage = ({
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
           )}
         >
-          <p className="text-sm font-light">{processedMessage}</p>{" "}
+          <p className="text-sm font-extralight">{processedMessage}</p>{" "}
           {/* font-light を追加 */}
         </Card>
       </div>
