@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils"; // cn 関数をインポート
 
 // アイコン画像をインポート
 import Icon0 from "/img/Icon/Icon1.png";
