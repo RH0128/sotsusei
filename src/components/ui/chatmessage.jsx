@@ -74,7 +74,12 @@ const ChatMessage = ({
           </span>
         )}
         <Card
-          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[75%] text-left`}
+          className={cn(
+            "p-4 rounded-2xl max-w-[75%] text-left",
+            isLeftAligned
+              ? "bg-[hsl(262,100%,50%)] text-[hsl(262,5%,90%)]" // 左揃え時のスタイル
+              : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
+          )}
         >
           <p className="text-sm">{processedMessage}</p>
         </Card>

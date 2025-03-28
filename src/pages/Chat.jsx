@@ -122,7 +122,7 @@ const Chat = () => {
                 isSameSpeaker={
                   index > 0 && messages[index - 1].speaker === msg.speaker
                 }
-                isLeftAligned={msg.isLeftAligned} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
+                isLeftAligned={msg.isLeftAligned} 
                 speechOrder={msg.speechOrder} // speechOrder を渡す
               />
             ))}
