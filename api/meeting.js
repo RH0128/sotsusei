@@ -2,6 +2,11 @@ const handler = async (req, res) => {
   try {
     const { speaker, from, until, maximumRecords } = req.query;
 
+    // バリデーション: speaker が指定されていない場合はエラーを返す
+    if (!speaker) {
+      return res.status(400).json({ error: "Speakerは必須です" });
+    }
+
     const response = await fetch(
       `https://kokkai.ndl.go.jp/api/meeting?${new URLSearchParams({
         speaker,
