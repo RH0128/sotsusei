@@ -74,7 +74,7 @@ const ChatMessage = ({
           </span>
         )}
         <Card
-          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[80%] text-left`}
+          className={`p-4 rounded-2xl bg-gray-100 text-gray-800 max-w-[75%] text-left`}
         >
           <p className="text-sm">{processedMessage}</p>
         </Card>
