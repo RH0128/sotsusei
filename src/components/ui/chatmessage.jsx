@@ -82,10 +82,12 @@ const ChatMessage = ({
               : "bg-gray-100 text-gray-800" // 右揃え時のスタイル
           )}
         >
-          <p className="text-sm font-thin leading-relaxed">
+          <p
+            className="text-sm font-thin leading-relaxed"
+            style={{ fontWeight: 300 }}
+          >
             {processedMessage}
-          </p>{" "}
-          {/* font-light を追加 */}
+          </p>
         </Card>
       </div>
       {showAvatar && !isLeftAligned && (
