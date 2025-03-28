@@ -104,7 +104,7 @@ const Chat = () => {
                 showSpeaker={index === 0 || messages[index - 1].speaker !== msg.speaker}
                 showAvatar={index === 0 || messages[index - 1].speaker !== msg.speaker}
                 isSameSpeaker={index > 0 && messages[index - 1].speaker === msg.speaker}
-                // isLeftAligned={msg.speechOrder % 2 !== 0} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
+                isLeftAligned={msg.isLeftAligned} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
                 speechOrder={msg.speechOrder} // speechOrder を渡す
               />
             ))}
