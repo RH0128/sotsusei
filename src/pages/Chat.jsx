@@ -45,26 +45,34 @@ const Chat = () => {
       return;
     }
 
-    let previousSpeaker = null; // 前発言者を追跡する変数
+    let isLeftSide = false; // 初期状態（最初のスピーカーは右側）
+    let currentSpeaker = null;
 
     const formattedMessages = record.speechRecord.flatMap((speech, idx) => {
+      console.log(currentSpeaker, speech.speaker);
+      if (currentSpeaker !== null && currentSpeaker !== speech.speaker) {
+        isLeftSide = !isLeftSide;
+      }
+      console.log(isLeftSide);
+      currentSpeaker = speech.speaker;
+
       return speech.speech
         .split("。")
         .filter((sentence) => sentence.trim() !== "")
         .map((sentence, sentenceIdx) => {
-          const isSameSpeaker = previousSpeaker === speech.speaker;
-          console.log("Previous Speaker:", previousSpeaker);
-          console.log("Current Speaker:", speech.speaker);
-          console.log("Is Same Speaker:", isSameSpeaker);
+          // const isSameSpeaker = previousSpeaker === speech.speaker;
+          // console.log("Previous Speaker:", previousSpeaker);
+          // console.log("Current Speaker:", speech.speaker);
+          // console.log("Is Same Speaker:", isSameSpeaker);
 
-          previousSpeaker = speech.speaker; // 現在の発言者を前発言者として保存
+          // previousSpeaker = speech.speaker; // 現在の発言者を前発言者として保存
 
           return {
             id: `${speech.speechID}-${sentenceIdx}`,
             speaker: speech.speaker,
             message: sentence + "。",
             speechOrder: speech.speechOrder,
-            isLeftAligned: !isSameSpeaker && previousSpeaker !== null, // 発言者が切り替わった場合に左右を切り替える
+            isLeftAligned: isLeftSide, // 発言者が切り替わった場合に左右を切り替える
           };
         });
     });
@@ -112,11 +120,10 @@ const Chat = () => {
                   index === 0 || messages[index - 1].speaker !== msg.speaker
                 }
                 isSameSpeaker={
-                  index > 0 && messages[index - 1].speaker === msg.speaker // 前のメッセージと比較して同じ発言者か判定
+                  index > 0 && messages[index - 1].speaker === msg.speaker
                 }
-                isLeftAligned={
-                  index === 0 || messages[index - 1].speaker !== msg.speaker // 発言者が切り替わった場合に左右を切り替える
-                }
+                isLeftAligned={msg.isLeftAligned} // speechOrder が奇数の場合は左揃え、偶数の場合は右揃え
+                speechOrder={msg.speechOrder} // speechOrder を渡す
               />
             ))}
           </div>
