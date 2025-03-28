@@ -108,24 +108,30 @@ const Chat = () => {
 
           {/* Chat Messages */}
           <div className="space-y-6 pb-10">
-            {messages.map((msg, index) => (
-              <ChatMessage
-                key={msg.id}
-                speaker={msg.speaker}
-                message={msg.message}
-                showSpeaker={
-                  index === 0 || messages[index - 1].speaker !== msg.speaker
-                }
-                showAvatar={
-                  index === 0 || messages[index - 1].speaker !== msg.speaker
-                }
-                isSameSpeaker={
-                  index > 0 && messages[index - 1].speaker === msg.speaker
-                }
-                isLeftAligned={msg.isLeftAligned} 
-                speechOrder={msg.speechOrder} // speechOrder を渡す
-              />
-            ))}
+            {messages.length === 0 ? (
+              <div className="p-4 text-center text-muted-foreground">
+                該当するメッセージがありませんでした
+              </div>
+            ) : (
+              messages.map((msg, index) => (
+                <ChatMessage
+                  key={msg.id}
+                  speaker={msg.speaker}
+                  message={msg.message}
+                  showSpeaker={
+                    index === 0 || messages[index - 1].speaker !== msg.speaker
+                  }
+                  showAvatar={
+                    index === 0 || messages[index - 1].speaker !== msg.speaker
+                  }
+                  isSameSpeaker={
+                    index > 0 && messages[index - 1].speaker === msg.speaker
+                  }
+                  isLeftAligned={msg.isLeftAligned}
+                  speechOrder={msg.speechOrder} // speechOrder を渡す
+                />
+              ))
+            )}
           </div>
         </div>
       </SidebarInset>
