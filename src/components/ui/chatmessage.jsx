@@ -84,7 +84,6 @@ const ChatMessage = ({
         >
           <p
             className="text-sm font-thin leading-relaxed"
-            style={{ fontWeight: Light300 }}
           >
             {processedMessage}
           </p>
